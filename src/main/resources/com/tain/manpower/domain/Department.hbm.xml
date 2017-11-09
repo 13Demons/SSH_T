@@ -1,0 +1,29 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.tain.manpower.domain">
+    <class name="Department" table="T_DEPT">
+        <id name="depId" column="DEPT_ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="depName"/>
+
+        <set name="postSet" table="T_POST" cascade="save-update" inverse="true">
+            <key column="DEPT_ID"/>
+            <one-to-many class="Post"/>
+        </set>
+
+        <set name="staffSet" table="T_STAFF" cascade="save-update" inverse="true">
+            <key column="DEPT_ID"/>
+            <one-to-many class="Staff"/>
+        </set>
+
+    </class>
+
+
+
+
+
+
+</hibernate-mapping>

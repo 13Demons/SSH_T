@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true"/>
+    <constant name="struts.objectFactory" value="spring"/>
+
+    <package name="ssh" extends="json-default">
+        <action name="register" class="com.tain.manpower.action.StaffAction" method="register">
+            <result name="success">/pages/frame.jsp</result>
+            <result name="error">/pages/error.jsp</result>
+        </action>
+
+    </package>
+
+
+</struts>
