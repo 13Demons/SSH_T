@@ -1,5 +1,6 @@
 package com.tian.manpower.domain;
 
+import com.tain.manpower.dao.StaffDao;
 import com.tain.manpower.domain.Department;
 import com.tain.manpower.domain.Post;
 import com.tain.manpower.domain.Staff;
@@ -7,13 +8,15 @@ import com.tain.manpower.utils.HibernateUtil;
 
 import org.hibernate.Session;
 import org.junit.Test;
-
+import org.junit.runner.RunWith;
 
 
 /**
  * Created by dllo on 17/11/9.
  */
+
 public class DepartmentTest {
+
 
     @Test
     public void test(){

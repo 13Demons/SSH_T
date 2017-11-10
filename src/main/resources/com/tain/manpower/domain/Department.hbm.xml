@@ -14,10 +14,10 @@
             <one-to-many class="Post"/>
         </set>
 
-        <set name="staffSet" table="T_STAFF" cascade="save-update" inverse="true">
-            <key column="DEPT_ID"/>
-            <one-to-many class="Staff"/>
-        </set>
+        <!--<set name="staffSet" table="T_STAFF" cascade="save-update" inverse="true">-->
+            <!--<key column="DEPT_ID"/>-->
+            <!--<one-to-many class="Staff"/>-->
+        <!--</set>-->
 
     </class>
 

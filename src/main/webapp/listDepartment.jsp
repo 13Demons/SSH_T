@@ -25,9 +25,10 @@
    
     <td width="57%"align="right">
     	<%--添加部门 --%>
-       <a href="pass.action">
-       		<img src="${pageContext.request.contextPath}/images/button/tianjia.gif" />
-       </a>
+
+        <s:a action="departmentAction_addOrEditPre" namespace="/">
+            <img src="${pageContext.request.contextPath}/images/button/tianjia.gif" />
+        </s:a>
       
     </td>
     <td width="3%" align="right"><img src="${pageContext.request.contextPath}/images/tright.gif"/></td>
@@ -46,17 +47,18 @@
     <td width="7%" align="center">编辑</td>
   </tr>
 
-        <s:iterator value="query" var="q">
-            <tr class="tabtd1">
-            <td align="center">${q.depName}</td>
+    <s:iterator value="%{#allDepartment}" status="sl">
+        <tr class="<s:property value="#sl.even ? 'tabtd2':'table1'" />">
+            <td align="center"><s:property value="depName"/> </td>
             <td width="7%" align="center">
-                <a href="pass.action?depId=${q.depId}"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/></a>
+                <s:a action="departmentAction_addOrEditPre">
+                    <s:param name="depId" value="depId"/>
+                    <img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" />
+                </s:a>
             </td>
-             </tr>
-        </s:iterator>
-
-
-
+        </tr>
+    </s:iterator>
+  
 
   
 </table>

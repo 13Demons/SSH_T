@@ -5,7 +5,6 @@ import com.tain.manpower.dao.impl.StaffDaoImpl;
 import com.tain.manpower.domain.Staff;
 import com.tain.manpower.service.StaffService;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 
@@ -13,26 +12,35 @@ import java.util.List;
  * Created by dllo on 17/11/9.
  */
 public class StaffServiceImpl implements StaffService {
-    @Resource
-    private StaffDaoImpl staffDao;
 
 
-//    public java.util.List<Staff> register(String loginName, String loginPwd) {
-//
-//        return staffDao.register(loginName,loginPwd);
-//    }
+    private StaffDao staffDao;
 
-
+    //登录
     @Override
-    public List<Staff> register(String loginName, String loginPwd) {
-        return staffDao.register(loginName,loginPwd);
+    public List<Staff> login(String loginName, String loginPwd) {
+        return staffDao.login(loginName,loginPwd);
     }
 
 
 
-//    public void setStaffDao(StaffDao staffDao) {
-//        this.staffDao = staffDao;
-//    }
+    //显示所有
+    @Override
+    public List<Staff> findAll() {
+        return staffDao.findAll();
+    }
+
+
+
+
+
+
+    @Override
+    public List<Staff> addStaff(Staff staff) {
+        return null;
+    }
+
+
 
 
     public void setStaffDao(StaffDaoImpl staffDao) {

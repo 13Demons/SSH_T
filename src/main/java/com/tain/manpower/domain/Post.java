@@ -6,6 +6,7 @@ import java.util.Set;
 /**
  * Created by dllo on 17/11/9.
  */
+//职位
 public class Post {
 
     private String postId;

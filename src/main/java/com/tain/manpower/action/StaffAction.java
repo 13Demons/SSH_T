@@ -1,5 +1,6 @@
 package com.tain.manpower.action;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.tain.manpower.domain.Staff;
@@ -17,16 +18,22 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
     @Resource
     private StaffService staffService;
 
-
-
-    public String register(){
-        List<Staff> staffs = staffService.register(staff.getLoginName(),staff.getLoginPwd());
-        if (staffs.isEmpty()){
+    //登录
+    public String login() {
+        List<Staff> staffs = staffService.login(staff.getLoginName(), staff.getLoginPwd());
+        if (staffs.isEmpty()) {
             return ERROR;
         }
+        ActionContext.getContext().getSession().put("username", staffs.get(0).getStaffName());
         return SUCCESS;
     }
 
+    //显示全部
+    public String findAll() {
+        List<Staff> staffs = staffService.findAll();
+        ActionContext.getContext().put("staffs", staffs);
+        return SUCCESS;
+    }
 
 
     @Override

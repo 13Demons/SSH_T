@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+    <package name="dept" extends="json-default">
+
+        <default-class-ref class="com.tain.department.action.DeptAction"/>
+
+        <action name="save" method="save">
+            <result name="success" type="chain">query</result>
+        </action>
+
+        <action name="query" method="query">
+            <result name="success">/pages/department/listDepartment.jsp</result>
+        </action>
+
+        <action name="pass">
+            <result name="success">/pages/department/addOrEditDepartment.jsp</result>
+        </action>
+
+
+    </package>
+
+
+
+
+
+
+</struts>

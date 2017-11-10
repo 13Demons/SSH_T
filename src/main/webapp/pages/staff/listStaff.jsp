@@ -84,29 +84,46 @@
   </tr>
   
     
-	  <tr class="tabtd1"> 
-	    <td align="center">管理员</td>
-	    <td align="center"></td>
-	    <td align="center"></td>
-	    <td align="center"></td>
-	    <td align="center"></td>
-	  	<td width="7%" align="center">
-	  		
-	  		<a href="${pageContext.request.contextPath}/pages/staff/editStaff.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>	
-	  	</td>
-	  	
-	  </tr>
-    
-	  <tr class="tabtd2"> 
-	    <td align="center">赵六</td>
-	    <td align="center">男</td>
-	    <td align="center">2012-02-12</td>
-	    <td align="center">咨询部</td>
-	    <td align="center">主管</td>
-	  	<td width="7%" align="center">
-	  		
-	  		<a href="${pageContext.request.contextPath}/pages/staff/editStaff.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>	
-	  	</td>
+	  <%--<tr class="tabtd1"> --%>
+	    <%--<td align="center">管理员</td>--%>
+	    <%--<td align="center"></td>--%>
+	    <%--<td align="center"></td>--%>
+	    <%--<td align="center"></td>--%>
+	    <%--<td align="center"></td>--%>
+	  	<%--<td width="7%" align="center">--%>
+	  		<%----%>
+	  		<%--<a href="${pageContext.request.contextPath}/pages/staff/editStaff.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>	--%>
+	  	<%--</td>--%>
+	  <%--</tr>--%>
+    <%----%>
+	  <%--<tr class="tabtd2"> --%>
+	    <%--<td align="center">赵六</td>--%>
+	    <%--<td align="center">男</td>--%>
+	    <%--<td align="center">2012-02-12</td>--%>
+	    <%--<td align="center">咨询部</td>--%>
+	    <%--<td align="center">主管</td>--%>
+	  	<%--<td width="7%" align="center">--%>
+	  		<%----%>
+	  		<%--<a href="${pageContext.request.contextPath}
+	  		/pages/staff/editStaff.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>	--%>
+	  	<%--</td>--%>
+
+	<s:iterator value="#staffList" status="sl">
+	<tr class="<s:property value="#sl.even ? 'tabtd2':'table1'" />">
+		<td align="center"><s:property value="staffName"/> </td>
+		<td align="center"><s:property value="gender"/></td>
+		<td align="center"><s:property value="onDutyDate"/></td>
+		<td align="center"><s:property value="post.department.depName"/></td>
+		<td align="center"><s:property value="post.postName"/></td>
+		<td width="7%" align="center">
+			<s:a namespace="/" action="staffAction_editStaffPre">
+				<s:param name="staffId" value="staffId"/>
+				<img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
+			</s:a>
+		</td>
+		</s:iterator>
+
+
 	  </tr>
 </table>
 

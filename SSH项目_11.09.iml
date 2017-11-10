@@ -10,6 +10,7 @@
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
         <sourceRoots>
+          <root url="file://$MODULE_DIR$/src/main/java" />
           <root url="file://$MODULE_DIR$/src/main/resources" />
         </sourceRoots>
       </configuration>
@@ -20,6 +21,7 @@
             <file>jar://$MAVEN_REPOSITORY$/org/apache/struts/struts2-json-plugin/2.5.13/struts2-json-plugin-2.5.13.jar!/struts-plugin.xml</file>
             <file>jar://$MAVEN_REPOSITORY$/org/apache/struts/struts2-spring-plugin/2.5.13/struts2-spring-plugin-2.5.13.jar!/struts-plugin.xml</file>
             <file>file://$MODULE_DIR$/src/main/resources/struts.xml</file>
+            <file>file://$MODULE_DIR$/src/main/resources/struts/dept_struts.xml</file>
           </fileset>
           <propertiesKeys disabled="false" />
         </configuration>
@@ -29,6 +31,9 @@
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
           <file>file://$MODULE_DIR$/src/main/resources/spring-config.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/tain/department/dept_spring.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/spring-config.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/dept_spring.xml</file>
         </fileset>
       </configuration>
     </facet>

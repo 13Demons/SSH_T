@@ -9,12 +9,20 @@
     <constant name="struts.objectFactory" value="spring"/>
 
     <package name="ssh" extends="json-default">
-        <action name="register" class="com.tain.manpower.action.StaffAction" method="register">
+        <action name="login" class="com.tain.manpower.action.StaffAction" method="login">
             <result name="success">/pages/frame.jsp</result>
             <result name="error">/pages/error.jsp</result>
         </action>
 
+        <action name="findAll" class="com.tain.manpower.action.StaffAction" method="findAll">
+            <result name="success">/pages/staff/listStaff.jsp</result>
+        </action>
+
     </package>
+
+
+    <include file="struts/dept_struts.xml"/>
+
 
 
 </struts>

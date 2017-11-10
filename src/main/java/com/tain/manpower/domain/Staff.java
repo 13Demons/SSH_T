@@ -1,5 +1,7 @@
 package com.tain.manpower.domain;
 
+import com.tain.manpower.utils.MD5Util;
+
 import java.util.Date;
 
 /**
@@ -58,6 +60,7 @@ public class Staff {
     }
 
     public void setLoginPwd(String loginPwd) {
+//        String md5 = MD5Util.MD5(loginPwd);
         this.loginPwd = loginPwd;
     }
 

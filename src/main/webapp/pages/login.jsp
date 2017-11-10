@@ -39,7 +39,7 @@ FONT-SIZE: 12px; COLOR: #4b4b4b; LINE-HEIGHT: 18px; TEXT-DECORATION: none
 		<tr align="center" >
 		 
 			<td class="login_msg" width="400">
-				<form action="register.action" method="post">
+				<form action="login.action" method="post">
 					
 					<font size="6" color="#ffffff">
 						欢迎使用CRM系统
@@ -50,10 +50,10 @@ FONT-SIZE: 12px; COLOR: #4b4b4b; LINE-HEIGHT: 18px; TEXT-DECORATION: none
 						错误提示
 					</font> 
 					<br/>
-					用户名：<input type="text" name="loginName" class="msg" /><br/><br/>
+					用户名：<input type="text" name="loginName" class="msg"/><br/><br/>
 					密&nbsp;码：<input type="password" class="msg" name="loginPwd"/><br/><br/>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="submit" class="btn" value="登录" />
+					<input type="submit" class="btn" value="登录"/>
 					
 				</form>
 			</td>
