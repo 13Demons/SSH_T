@@ -22,7 +22,7 @@
 
 
     <include file="struts/dept_struts.xml"/>
-
+    <include file="struts/post_struts.xml"/>
 
 
 </struts>

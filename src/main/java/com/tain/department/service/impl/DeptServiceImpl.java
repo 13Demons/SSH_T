@@ -15,6 +15,7 @@ public class DeptServiceImpl implements DeptService {
 
     @Override
     public List<Department>save(Department department) {
+
         return deptDao.save(department);
     }
 

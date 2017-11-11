@@ -15,6 +15,7 @@ import java.util.List;
 public class DeptAction extends ActionSupport implements ModelDriven<Department> {
     private Department dept=new Department();
 
+
     @Resource
     private DeptService deptService;
     private List<Department> query;
@@ -25,6 +26,9 @@ public class DeptAction extends ActionSupport implements ModelDriven<Department>
         ActionContext.getContext().put("deptService",save);
         return SUCCESS;
     }
+
+
+
 
     //查询
     public String query(){

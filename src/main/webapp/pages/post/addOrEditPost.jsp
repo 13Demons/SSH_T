@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -34,21 +35,33 @@
   </tr>
 </table>
 
-<form action="${pageContext.request.contextPath}/pages/post/listPost.jsp" method="post">
+
+
+
+<form action="post_save.action" method="post">
+
+    <input type="hidden" name="psotId" value="${postId}">
+
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	 <tr>
 	    <td>选择部门：</td>
-	    <td><select name="crmDepartment.depId">
-		    <option value="">----请--选--择----</option>
-		    <option value="ee050687bd1a4455a153d7bbb7000001" selected="selected">教学部</option>
-		    <option value="ee050687bd1a4455a153d7bbb7000002">咨询部</option>
-		</select>
-  </td>
+	    <td>
+
+            <select name="department.depId">
+                <option value="department.depName">----请--选--择----</option>
+                <option value="${depId}">${depName}</option>
+
+            <s:iterator value="query" var="q">
+                <option value="${q.depId}">${q.depName}</option>
+            </s:iterator>
+
 	    <td>职务：</td>
-	    <td><input type="text" name="postName" value="总监"/> </td>
+	    <td><input type="text" name="postName" value="${postName}"/> </td>
 	  </tr>
 	</table>
 </form>
+
+
 
 </body>
 </html>
