@@ -11,5 +11,4 @@ public interface PostDao {
 
     List<Post>query();
     List<Post>save(Post post);
-
 }

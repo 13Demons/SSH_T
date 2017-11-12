@@ -21,8 +21,6 @@ public class DeptDaoImpl extends HibernateDaoSupport implements DeptDao {
         }else {
             getHibernateTemplate().saveOrUpdate(department);
         }
-
-
         return null;
     }
 

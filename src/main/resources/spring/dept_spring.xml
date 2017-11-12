@@ -7,16 +7,6 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
 
-
-
-
-
-
-
-
-
-
-
     <bean id="deptDao" class="com.tain.department.dao.impl.DeptDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
@@ -24,11 +14,6 @@
     <bean id="deptService" class="com.tain.department.service.impl.DeptServiceImpl">
         <property name="deptDao" ref="deptDao"/>
     </bean>
-
-
-
-
-
 
 
 

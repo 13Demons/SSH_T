@@ -36,8 +36,6 @@ public class PostAction extends ActionSupport implements ModelDriven<Post> {
 
     public String hold(){
 
-
-
         return SUCCESS;
     }
 
