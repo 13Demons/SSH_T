@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -22,29 +23,45 @@
     <td width="39%" align="left">[员工管理]</td>
    
     <td width="57%"align="right">
-    	<%--高级查询 --%>
-		<a href="javascript:void(0)" onclick="condition()"><img src="${pageContext.request.contextPath}/images/button/gaojichaxun.gif" /></a>
-    	<%--员工注入 --%>
+
+    	<%--高级查询--%>
+		<a href="javascript:void(0)" onclick="condition()">
+			<img src="${pageContext.request.contextPath}/images/button/gaojichaxun.gif" />
+		</a>
+
+		<%--员工添加--%>
 	  	<a href="${pageContext.request.contextPath}/pages/staff/addStaff.jsp">
 	  		<img src="${pageContext.request.contextPath}/images/button/tianjia.gif" />
 	  	</a>
-      
+
+
+
     </td>
     <td width="3%" align="right"><img src="${pageContext.request.contextPath}/images/tright.gif"/></td>
   </tr>
 </table>
 
+
+
+
+
 <!-- 查询条件：马上查询 -->
-<form id="conditionFormId" action="${pageContext.request.contextPath}/staff/staffAction_findAll" method="post">
+<form id="conditionFormId" action="findDepartment.action" method="post">
 	<table width="88%" border="0" style="margin: 20px;" >
 	  <tr>
 	    <td width="80px">部门：</td>
 	    <td width="200px">
 	    	
-	    	<select name="crmPost.crmDepartment.depId" onchange="changePost(this)">
+	    	<select name="crm0Post.crmDepartment.depId" onchange="changePost(this)">
 			    <option value="">--请选择部门--</option>
-			    <option value="ee050687bd1a4455a153d7bbb7000001">教学部</option>
-			    <option value="ee050687bd1a4455a153d7bbb7000002">咨询部</option>
+
+			    <s:iterator value="departmentList" var="dept">
+					${dept}
+					<option value="${dept.depId}">${dept.depName}</option>
+				</s:iterator>
+
+
+
 			</select>
 
 	    </td>
@@ -53,9 +70,11 @@
 	    	
 	    	<select name="crmPost.postId" id="postSelectId">
 			    <option value="">--请选择职务--</option>
-			    <option value="ee050687bd1a4455a153d7bbb7000003">总监</option>
-			    <option value="ee050687bd1a4455a153d7bbb7000004">讲师</option>
-			    <option value="ee050687bd1a4455a153d7bbb7000005">主管</option>
+
+			    <%--<option value="ee050687bd1a4455a153d7bbb7000003">总监</option>--%>
+			    <%--<option value="ee050687bd1a4455a153d7bbb7000004">讲师</option>--%>
+			    <%--<option value="ee050687bd1a4455a153d7bbb7000005">主管</option>--%>
+
 			</select>
 
 	    </td>
@@ -83,52 +102,31 @@
     <td width="10%" align="center">编辑</td>
   </tr>
   
-    
-	  <%--<tr class="tabtd1"> --%>
-	    <%--<td align="center">管理员</td>--%>
-	    <%--<td align="center"></td>--%>
-	    <%--<td align="center"></td>--%>
-	    <%--<td align="center"></td>--%>
-	    <%--<td align="center"></td>--%>
-	  	<%--<td width="7%" align="center">--%>
-	  		<%----%>
-	  		<%--<a href="${pageContext.request.contextPath}/pages/staff/editStaff.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>	--%>
-	  	<%--</td>--%>
-	  <%--</tr>--%>
-    <%----%>
-	  <%--<tr class="tabtd2"> --%>
-	    <%--<td align="center">赵六</td>--%>
-	    <%--<td align="center">男</td>--%>
-	    <%--<td align="center">2012-02-12</td>--%>
-	    <%--<td align="center">咨询部</td>--%>
-	    <%--<td align="center">主管</td>--%>
-	  	<%--<td width="7%" align="center">--%>
-	  		<%----%>
-	  		<%--<a href="${pageContext.request.contextPath}
-	  		/pages/staff/editStaff.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>	--%>
-	  	<%--</td>--%>
 
-	<s:iterator value="#staffList" status="sl">
-	<tr class="<s:property value="#sl.even ? 'tabtd2':'table1'" />">
-		<td align="center"><s:property value="staffName"/> </td>
-		<td align="center"><s:property value="gender"/></td>
-		<td align="center"><s:property value="onDutyDate"/></td>
-		<td align="center"><s:property value="post.department.depName"/></td>
-		<td align="center"><s:property value="post.postName"/></td>
+	<s:iterator var="staff" value="staffs">
+	<tr class="tabtd2">
+		<td align="center">${staff.staffName}</td>
+		<td align="center">${staff.gender}</td>
+		<td align="center">${staff.onDutyDate}</td>
+		<td align="center">${post.department.depName}</td>
+		<td align="center">${post.postName}</td>
 		<td width="7%" align="center">
-			<s:a namespace="/" action="staffAction_editStaffPre">
-				<s:param name="staffId" value="staffId"/>
-				<img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
-			</s:a>
+				<a href="${pageContext.request.contextPath}
+                  /pages/staff/editStaff.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
 		</td>
 		</s:iterator>
+
+
+
+
+
 
 
 	  </tr>
 </table>
 
 
-<%-- 
+
 <table border="0" cellspacing="0" cellpadding="0" align="center">
   <tr>
     <td align="right">
@@ -142,6 +140,6 @@
     </td>
   </tr>
 </table>
---%>
+
 </body>
 </html>

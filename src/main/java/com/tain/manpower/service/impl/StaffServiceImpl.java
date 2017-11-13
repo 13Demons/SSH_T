@@ -2,6 +2,8 @@ package com.tain.manpower.service.impl;
 
 import com.tain.manpower.dao.StaffDao;
 import com.tain.manpower.dao.impl.StaffDaoImpl;
+import com.tain.manpower.domain.Department;
+import com.tain.manpower.domain.Post;
 import com.tain.manpower.domain.Staff;
 import com.tain.manpower.service.StaffService;
 
@@ -22,25 +24,26 @@ public class StaffServiceImpl implements StaffService {
         return staffDao.login(loginName,loginPwd);
     }
 
-
-
-    //显示所有
+    //显示全部
     @Override
-    public List<Staff> findAll() {
-        return staffDao.findAll();
+    public List<Staff> query() {
+        return staffDao.query();
     }
 
-
-
-
-
-
     @Override
-    public List<Staff> addStaff(Staff staff) {
-        return null;
+    public List<Staff> save(Staff staff) {
+        return staffDao.save(staff);
     }
 
+    @Override
+    public List<Department> findDepartment() {
+        return staffDao.findDepartment();
+    }
 
+    @Override
+    public List<Post> getPostByDeptId(String deptId) {
+        return staffDao.getPostByDeptId(deptId);
+    }
 
 
     public void setStaffDao(StaffDaoImpl staffDao) {

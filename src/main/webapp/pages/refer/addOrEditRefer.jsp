@@ -86,19 +86,19 @@
 	    	&nbsp;&nbsp;&nbsp;意向班级：
 	    	<%-- 
 	    	<s:if test="crmCourseType != null">
-		    	<s:select list="crmCourseType.crmClassSet" 
+		    	<s:service list="crmCourseType.crmClassSet"
 		    			id="classSelectId" 
 		    			listKey="classId" listValue="name" 
 		    			headerKey="" headerValue="----请--选--择----"
 		    			name="crmClass.classId"
-		    			></s:select>
+		    			></s:service>
 	    	</s:if>
 	    	<s:else>
-	    		<s:select list="{}" 
+	    		<s:service list="{}"
 		    			id="classSelectId" 
 		    			headerKey="" headerValue="----请--选--择----"
 		    			name="crmClass.classId"
-		    			></s:select>
+		    			></s:service>
 	    	</s:else>
 	    	--%>
 	    </td>
@@ -154,7 +154,7 @@
 					var textData = xmlhttp.responseText;
 					//@2 将文本转换成json数据  eval()  ,但兼容  eval("("+...+")")
 					var jsonData = eval("("+textData+")");
-					//@3 遍历数据，将数据添加到“职务”select
+					//@3 遍历数据，将数据添加到“职务”service
 					for(var i = 0 ; i < jsonData.length ; i ++){
 						var classObj = jsonData[i];
 						// @3.1 编号

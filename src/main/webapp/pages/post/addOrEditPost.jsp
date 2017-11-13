@@ -40,19 +40,21 @@
 
 <form action="post_save.action" method="post">
 
-    <input type="hidden" name="psotId" value="${postId}">
+    <input type="hidden" name="postId" value="${postId}">
 
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	 <tr>
 	    <td>选择部门：</td>
 	    <td>
-            <select name="department.depId">
+
+            <option value="${depId}">${depName}</option>
+            <select name="depId">
                 <option value="department.depName">----请--选--择----</option>
-                <option value="${depId}">${depName}</option>
             <s:iterator value="query" var="q">
                 <option value="${q.depId}">${q.depName}</option>
             </s:iterator>
-
+            </select>
+         </td>
 	    <td>职务：</td>
 	    <td><input type="text" name="postName" value="${postName}"/> </td>
 	  </tr>

@@ -1,5 +1,6 @@
 package com.tain.post.action;
 
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -15,27 +16,28 @@ import java.util.List;
  * Created by dllo on 17/11/11.
  */
 public class PostAction extends ActionSupport implements ModelDriven<Post> {
+
     private Post post = new Post();
-    private Department department = new Department();
+    private String postId;
+
+    private String depId;
+    private String depName;
+
+
 
     @Resource
     private PostService postService;
     private List<Post> query;
 
-    public String save(){
-        List<Post> save = postService.save(post);
-        ActionContext.getContext().put("post",save);
-        return SUCCESS;
-    }
 
     public String query(){
         query = postService.query();
         return SUCCESS;
     }
 
-
-    public String hold(){
-
+    public String save(){
+        post.setDepartment(new Department(depId,null));
+        postService.save(post);
         return SUCCESS;
     }
 
@@ -55,5 +57,27 @@ public class PostAction extends ActionSupport implements ModelDriven<Post> {
         return query;
     }
 
+    public String getDepId() {
+        return depId;
+    }
 
+    public void setDepId(String depId) {
+        this.depId = depId;
+    }
+
+    public String getPostId() {
+        return postId;
+    }
+
+    public void setPostId(String postId) {
+        this.postId = postId;
+    }
+
+    public String getDepName() {
+        return depName;
+    }
+
+    public void setDepName(String depName) {
+        this.depName = depName;
+    }
 }

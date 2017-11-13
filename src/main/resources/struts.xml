@@ -9,14 +9,49 @@
     <constant name="struts.objectFactory" value="spring"/>
 
     <package name="ssh" extends="json-default">
-        <action name="login" class="com.tain.manpower.action.StaffAction" method="login">
+
+        <default-class-ref class="com.tain.manpower.action.StaffAction"/>
+
+
+        <action name="login"  method="login">
             <result name="success">/pages/frame.jsp</result>
-            <result name="error">/pages/error.jsp</result>
+            <result name="error">/pages/login.jsp</result>
         </action>
 
-        <action name="findAll" class="com.tain.manpower.action.StaffAction" method="findAll">
+
+
+
+        <action name="staff_query"  method="query">
             <result name="success">/pages/staff/listStaff.jsp</result>
         </action>
+
+        <action name="staffDeptquery" class="com.tain.department.action.DeptAction" method="query">
+            <result name="success">/pages/staff/addStaff.jsp</result>
+        </action>
+
+
+        <action name="staff_save" method="save">
+            <result name="success"></result>
+        </action>
+
+
+
+        <action name="findDepartment"  method="findDepartment">
+            <result name="success">/pages/staff/listStaff.jsp</result>
+        </action>
+
+
+
+
+
+
+        <action name="getPostByDeptId" method="getPostByDeptId">
+            <result name="success" type="redirectAction">findDepartment</result>
+
+        </action>
+
+
+
 
     </package>
 

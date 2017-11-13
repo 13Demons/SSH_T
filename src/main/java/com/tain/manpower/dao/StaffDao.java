@@ -1,5 +1,7 @@
 package com.tain.manpower.dao;
 
+import com.tain.manpower.domain.Department;
+import com.tain.manpower.domain.Post;
 import com.tain.manpower.domain.Staff;
 
 import java.util.List;
@@ -10,10 +12,10 @@ import java.util.List;
 public interface StaffDao {
    //登录
     List<Staff>login(String loginName, String loginPwd);
-    //添加
-    List<Staff>addStaff(Staff staff);
-    //显示
-    List<Staff>findAll();
+    List<Staff>query();
+    List<Staff>save(Staff staff);
 
+    List<Department> findDepartment();
+    List<Post>getPostByDeptId(String deptId);
 
 }

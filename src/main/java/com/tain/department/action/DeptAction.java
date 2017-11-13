@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class DeptAction extends ActionSupport implements ModelDriven<Department> {
     private Department dept=new Department();
-
+    private String  postId;
 
     @Resource
     private DeptService deptService;
@@ -27,9 +27,6 @@ public class DeptAction extends ActionSupport implements ModelDriven<Department>
         return SUCCESS;
     }
 
-
-
-
     //查询
     public String query(){
         query = deptService.query();
@@ -37,9 +34,6 @@ public class DeptAction extends ActionSupport implements ModelDriven<Department>
         return SUCCESS;
 
     }
-
-
-
 
 
     @Override
@@ -53,5 +47,14 @@ public class DeptAction extends ActionSupport implements ModelDriven<Department>
 
     public void setQuery(List<Department> query) {
         this.query = query;
+    }
+
+
+    public String getPostId() {
+        return postId;
+    }
+
+    public void setPostId(String postId) {
+        this.postId = postId;
     }
 }

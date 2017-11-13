@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE validators PUBLIC
+        "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+    <field name="staff.loginName">
+        <field-validator type="requiredstring">
+            <message>用户名不能为空</message>
+        </field-validator>
+    </field>
+    
+    <!--<field name="staff.loginPwd">-->
+        <!--<field-validator type="regex">-->
+            <!--<param name="regexExpression"><![CDATA[[a-zA-Z0-9]{3,8}]]></param>-->
+            <!--<message>你的密码必须有3~8位数字组成</message>-->
+        <!--</field-validator>-->
+        <!---->
+        <!--<field-validator type="requiredstring">-->
+            <!--<message>密码不能为空</message>-->
+        <!--</field-validator>-->
+    <!--</field>-->
+</validators>

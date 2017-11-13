@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
@@ -47,25 +48,26 @@ FONT-SIZE: 12px; COLOR: #4b4b4b; LINE-HEIGHT: 18px; TEXT-DECORATION: none
 					<br/>
 					<br/>
 					<font color="#ff0000">
-						错误提示
-					</font> 
+						<s:actionerror/>
+						<s:fielderror/>
+					</font>
 					<br/>
-					用户名：<input type="text" name="loginName" class="msg"/><br/><br/>
-					密&nbsp;码：<input type="password" class="msg" name="loginPwd"/><br/><br/>
+					用户名：<input type="text" name="loginName"/><br/><br/>
+					密&nbsp;码：<input type="password" name="loginPwd"/><br/><br/>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="submit" class="btn" value="登录"/>
-					
+
 				</form>
 			</td>
 		</tr>
 	</table>
 	
-	<script type="text/javascript">
-		/* s标签中直接编写JavaScript代码时，不支持el表达式，只能提供单独的函数
-		function registerUrl(){
-			document.location='${pageContext.request.contextPath}/uiAction_staff_register';
-		}
-		*/
-	</script>
+	<%--<script type="text/javascript">--%>
+		<%--/* s标签中直接编写JavaScript代码时，不支持el表达式，只能提供单独的函数--%>
+		<%--function registerUrl(){--%>
+			<%--document.location='${pageContext.request.contextPath}/uiAction_staff_register';--%>
+		<%--}--%>
+		<%--*/--%>
+	<%--</script>--%>
 </div>
 </BODY></HTML>

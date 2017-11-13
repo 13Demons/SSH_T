@@ -36,7 +36,7 @@ function changePost(departmentObj,postId){
 			var textData = xmlhttp.responseText;
 			//@2 将文本转换成json数据  eval()  ,但兼容  eval("("+...+")")
 			var jsonData = eval("("+textData+")");
-			//@3 遍历数据，将数据添加到“职务”select
+			//@3 遍历数据，将数据添加到“职务”service
 			for(var i = 0 ; i < jsonData.length ; i ++){
 				var postObj = jsonData[i];
 				// @3.1 编号

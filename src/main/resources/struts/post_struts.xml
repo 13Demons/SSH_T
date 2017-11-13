@@ -17,10 +17,16 @@
         <action name="postquery" method="query">
             <result name="success">/pages/post/listPost.jsp</result>
         </action>
-        <action name="post_pass" class="com.tain.department.action.DeptAction" method="query">
+
+
+        <action name="postDeptquery" class="com.tain.department.action.DeptAction" method="query">
             <result name="success">/pages/post/addOrEditPost.jsp</result>
         </action>
 
+
+        <action name="post_class">
+            <result name="success">/pages/post/addOrEditPost.jsp</result>
+        </action>
 
 
 

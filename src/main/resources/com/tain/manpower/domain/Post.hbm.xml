@@ -12,7 +12,7 @@
        <many-to-one name="department"
                     class="Department"
                     column="DEPT_ID"
-                    cascade="save-update"
+
                     lazy="false"/>
 
         <set name="staffSet" table="T_STAFF" cascade="save-update" inverse="true">
