@@ -51,7 +51,8 @@
             <td align="center">${q.depName}</td>
             <td width="7%" align="center">
                 <a href="pass.action?depId=${q.depId}&depName=${q.depName}">
-                <img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/></a>
+                <img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/>
+                </a>
             </td>
              </tr>
         </s:iterator>

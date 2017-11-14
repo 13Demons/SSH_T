@@ -7,10 +7,10 @@ import com.tain.manpower.domain.Department;
 import com.tain.manpower.domain.Post;
 import com.tain.manpower.domain.Staff;
 import com.tain.manpower.service.StaffService;
-import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by dllo on 17/11/9.
@@ -18,15 +18,18 @@ import java.util.List;
 public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
     private Staff staff = new Staff();
 
-
     private String loginName;
     private String loginPwd;
     private String depId;
+    private String depName;
+
     @Resource
     private StaffService staffService;
     private List<Staff> staffs;
     private List<Department> departmentList;
-    private List<Post> deptId;
+    private List<Post> posts;
+    private List<Staff> save;
+    private List<Staff> staff_s;
 
 
     //登录
@@ -39,38 +42,33 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
         return SUCCESS;
     }
 
-
-
-    //无用---显示全部
+    //显示全部
     public String query() {
         staffs = staffService.query();
+        ActionContext.getContext().getSession().put("staff",staffs);
         return SUCCESS;
     }
 
-
-    //添加
-    public String save(){
-        List<Staff> save = staffService.save(staff);
-        ActionContext.getContext().put("staffService",save);
-        return SUCCESS;
-    }
-
-
+    //二级联动
     public String findDepartment(){
         departmentList = staffService.findDepartment();
+        staff_s = (List<Staff>) ActionContext.getContext().getSession().get("staff");
         return SUCCESS;
     }
+
+
+    //添加-修改
+    public String save(){
+        save = staffService.save(staff);
+        staff_s = (List<Staff>) ActionContext.getContext().getSession().get("staff");
+        return SUCCESS;
+    }
+
 
     public String getPostByDeptId(){
-        deptId = staffService.getPostByDeptId(depId);
+        posts = staffService.getPostByDeptId(depId);
         return SUCCESS;
     }
-
-
-
-
-
-
 
 
     @Override
@@ -118,11 +116,36 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
         this.depId = depId;
     }
 
-    public List<Post> getDeptId() {
-        return deptId;
+    public List<Post> getPosts() {
+        return posts;
     }
 
-    public void setDeptId(List<Post> deptId) {
-        this.deptId = deptId;
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
+
+    public String getDepName() {
+        return depName;
+    }
+
+    public void setDepName(String depName) {
+        this.depName = depName;
+    }
+
+    public List<Staff> getSave() {
+        return save;
+    }
+
+    public void setSave(List<Staff> save) {
+        this.save = save;
+    }
+
+    public List<Staff> getStaff_s() {
+        return staff_s;
+    }
+
+    public void setStaff_s(List<Staff> staff_s) {
+        this.staff_s = staff_s;
+    }
+
 }

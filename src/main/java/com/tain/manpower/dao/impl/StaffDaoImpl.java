@@ -6,6 +6,7 @@ import com.tain.manpower.domain.Post;
 import com.tain.manpower.domain.Staff;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -24,6 +25,7 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
         return list;
     }
 
+
     //显示
     @Override
     public List<Staff> query() {
@@ -35,14 +37,16 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
     //添加
     @Override
     public List<Staff> save(Staff staff) {
-        if (staff.getStaffId().isEmpty()){
+        if ("".equals(staff.getStaffId())){
             getHibernateTemplate().save(staff);
         }else {
             getHibernateTemplate().saveOrUpdate(staff);
         }
         return null;
+
     }
 
+    //二级联动(部门)
     @Override
     public List<Department> findDepartment() {
         String sql = "from Department T_DEPT";
@@ -50,6 +54,7 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
         return list;
     }
 
+    //二级联动(职位Id)
     @Override
     public List<Post> getPostByDeptId(String deptId) {
         String sql = "from Post T_POST where department.id=?";

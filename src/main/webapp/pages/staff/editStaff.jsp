@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -7,6 +8,53 @@
 <link href="${pageContext.request.contextPath}/css/sys.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/Calendar.js"></script>
 </head>
+
+<script>
+	function changePost(value) {
+
+		var data = new FormData();
+		data.append("depId", value)
+		var xhr = new XMLHttpRequest();
+		xhr.withCredentials = true;
+
+		xhr.addEventListener("readystatechange", function () {
+			if (this.readyState === 4) {
+				//得到的值
+				console.log(this.responseText);
+				//对请求回来的数据进行解析
+				json = eval('(' + this.responseText + ')');
+				//获取服务器标签
+				serverSelect = document.getElementById("postSelectId2");
+				//获取option标签
+				optionEle = serverSelect.getElementsByTagName("option");
+				//获取option数量
+				length = optionEle.length;
+				//使用循环清空所有option标签
+				for (var i = 0; i < length; i++) {
+					serverSelect.removeChild(optionEle[0]);
+				}
+				serverSelect.innerHTML = "<option value=''>--请选择职务--</option>";
+				// 将json数据插入到option中
+				for (var j = 0; j < json.length; j++) {
+					// 创建一个option标签
+					option = document.createElement("option");
+					// 设置value属性
+					option.setAttribute("value", json[j].postId);
+					// 设置文本信息
+					text = document.createTextNode(json[j].postName);
+					//  把文本信息添加到option中
+					option.appendChild(text);
+					// 把option标签添加到servers的select中
+					serverSelect.appendChild(option);
+				}
+			}
+		});
+		xhr.open("POST", "http://localhost:8080/getStaff.action");
+		xhr.send(data);
+	}
+
+</script>
+
 
 <body class="emp_body">
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
@@ -32,21 +80,23 @@
     <td width="3%" align="right"><img src="${pageContext.request.contextPath}/images/tright.gif"/></td>
   </tr>
 </table>
-
-<form action="/crm2/staff/staffAction_edit.action" method="post">
+<%
+	String postId = request.getParameter("staffId");
+%>
+<form action="staff_save.action" method="post">
 	
-	<input type="hidden" name="staffId" value="2c9091c14c78e58b014c78e7ecd90007"/>
+	<input type="hidden" name="staffId" value="<%=postId%>"/>
 	
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	 <tr>
 	    <td>登录名：</td>
-	    <td><input type="text" name="loginName" value="赵六" /> </td>
+	    <td><input type="text" name="loginName" placeholder="" /> </td>
 	    <td>密码：</td>
-	    <td><input type="password" name="loginPwd" value="54dfc11c8e9c49bab6068f473f913be9" /> </td>
+	    <td><input type="password" name="loginPwd" placeholder="" /> </td>
 	  </tr>
 	 <tr>
 	    <td>姓名：</td>
-	    <td><input type="text" name="staffName" value="赵六" /> </td>
+	    <td><input type="text" name="staffName" placeholder="" /> </td>
 	    <td>性别：</td>
 	    <td>
 	    	<input type="radio" name="gender" checked="checked" value="男"/>男
@@ -56,26 +106,25 @@
 	 <tr>
 	    <td width="10%">所属部门：</td>
 	    <td width="20%">
-	    	<select name="crmPost.crmDepartment.depId"  onchange="changePost(this)">
-			    <option value="">----请--选--择----</option>
-			    <option value="ee050687bd1a4455a153d7bbb7000001" selected="selected">教学部</option>
-			    <option value="ee050687bd1a4455a153d7bbb7000002">咨询部</option>
-			</select>
 
+			<select name="post.department.depId" onchange="changePost(this.value)">
+				<option value="">----请--选--择----</option>
+				<s:iterator value="departmentList" var="dept">
+					<option value="${dept.depId}">${dept.depName}</option>
+				</s:iterator>
+			</select>
 	    </td>
 	    <td width="8%">职务：</td>
 	    <td width="62%">
-	    	<select name="crmPost.postId" id="postSelectId">
-			    <option value="">----请--选--择----</option>
-			    <option value="2c9091c14c78e58b014c78e6b34a0003">总监</option>
-			    <option value="2c9091c14c78e58b014c78e6d4510004" selected="selected">讲师</option>
+			<select name="post.postId" id="postSelectId2">
+				<option value="">--请选择职务--</option>
 			</select>
 	    </td>
 	  </tr>
 	  <tr>
 	    <td width="10%">入职时间：</td>
 	    <td width="20%">
-	    	<input type="text" name="onDutyDate" value="2012-02-12" readonly="readonly" onfocus="c.showMoreDay=true; c.show(this);"/>
+	    	<input type="text" name="onDutyDate" placeholder="" readonly="readonly" onfocus="c.showMoreDay=true; c.show(this);"/>
 	    </td>
 	    <td width="8%"></td>
 	    <td width="62%"></td>
