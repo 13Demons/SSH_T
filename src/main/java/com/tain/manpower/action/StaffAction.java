@@ -83,9 +83,6 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
         String depId    = staff.getPost().getDepartment().getDepId();
         String postId   = staff.getPost().getPostId();
         String staffName = staff.getStaffName();
-        System.out.println("depId    :" + depId);
-        System.out.println("postId   :" + postId);
-        System.out.println("staffName:" + staffName);
         staffs = staffService.queryAll(
                 depId,
                 postId,
