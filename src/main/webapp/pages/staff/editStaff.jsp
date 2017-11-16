@@ -13,7 +13,7 @@
 	function changePost(value) {
 
 		var data = new FormData();
-		data.append("depId", value)
+		data.append("post.department.depId", value)
 		var xhr = new XMLHttpRequest();
 		xhr.withCredentials = true;
 
@@ -80,6 +80,7 @@
     <td width="3%" align="right"><img src="${pageContext.request.contextPath}/images/tright.gif"/></td>
   </tr>
 </table>
+
 <%
 	String postId = request.getParameter("staffId");
 %>

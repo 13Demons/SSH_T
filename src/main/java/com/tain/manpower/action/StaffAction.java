@@ -3,14 +3,15 @@ package com.tain.manpower.action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+
 import com.tain.manpower.domain.Department;
 import com.tain.manpower.domain.Post;
 import com.tain.manpower.domain.Staff;
 import com.tain.manpower.service.StaffService;
+import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by dllo on 17/11/9.
@@ -18,18 +19,14 @@ import java.util.Map;
 public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
     private Staff staff = new Staff();
 
-    private String loginName;
-    private String loginPwd;
-    private String depId;
-    private String depName;
-
     @Resource
     private StaffService staffService;
+
     private List<Staff> staffs;
     private List<Department> departmentList;
     private List<Post> posts;
-    private List<Staff> save;
-    private List<Staff> staff_s;
+    private String staffId;
+
 
 
     //登录
@@ -43,30 +40,57 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
     }
 
     //显示全部
+    @SkipValidation
     public String query() {
+        //所有部门获取到
         staffs = staffService.query();
         ActionContext.getContext().getSession().put("staff",staffs);
         return SUCCESS;
+
     }
 
     //二级联动
+    @SkipValidation
     public String findDepartment(){
+        ActionContext.getContext().getSession().put("staffId",staffId);
+        System.out.println(staffId);
         departmentList = staffService.findDepartment();
-        staff_s = (List<Staff>) ActionContext.getContext().getSession().get("staff");
+        staffs = (List<Staff>) ActionContext.getContext().getSession().get("staff");
         return SUCCESS;
     }
 
 
     //添加-修改
+    @SkipValidation
     public String save(){
-        save = staffService.save(staff);
-        staff_s = (List<Staff>) ActionContext.getContext().getSession().get("staff");
+        System.out.println(staff.getStaffId()+"********");
+        staff.setStaffId(staffId);
+        staffService.save(staff);
+        return SUCCESS;
+    }
+
+    @SkipValidation
+    public String getPostByDeptId(){
+        posts = staffService.getPostByDeptId(staff.getPost().getDepartment().getDepId());
         return SUCCESS;
     }
 
 
-    public String getPostByDeptId(){
-        posts = staffService.getPostByDeptId(depId);
+
+    //psotId depId staffName
+    @SkipValidation
+    public String queryAll(){
+        String depId    = staff.getPost().getDepartment().getDepId();
+        String postId   = staff.getPost().getPostId();
+        String staffName = staff.getStaffName();
+        System.out.println("depId    :" + depId);
+        System.out.println("postId   :" + postId);
+        System.out.println("staffName:" + staffName);
+        staffs = staffService.queryAll(
+                depId,
+                postId,
+                staffName);
+        System.out.println("staffs.size():" + staffs.size());
         return SUCCESS;
     }
 
@@ -84,21 +108,6 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
         this.staffs = staffs;
     }
 
-    public String getLoginName() {
-        return loginName;
-    }
-
-    public void setLoginName(String loginName) {
-        this.loginName = loginName;
-    }
-
-    public String getLoginPwd() {
-        return loginPwd;
-    }
-
-    public void setLoginPwd(String loginPwd) {
-        this.loginPwd = loginPwd;
-    }
 
     public List<Department> getDepartmentList() {
         return departmentList;
@@ -106,14 +115,6 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
 
     public void setDepartmentList(List<Department> departmentList) {
         this.departmentList = departmentList;
-    }
-
-    public String getDepId() {
-        return depId;
-    }
-
-    public void setDepId(String depId) {
-        this.depId = depId;
     }
 
     public List<Post> getPosts() {
@@ -124,28 +125,11 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
         this.posts = posts;
     }
 
-    public String getDepName() {
-        return depName;
+    public String getStaffId() {
+        return staffId;
     }
 
-    public void setDepName(String depName) {
-        this.depName = depName;
+    public void setStaffId(String staffId) {
+        this.staffId = staffId;
     }
-
-    public List<Staff> getSave() {
-        return save;
-    }
-
-    public void setSave(List<Staff> save) {
-        this.save = save;
-    }
-
-    public List<Staff> getStaff_s() {
-        return staff_s;
-    }
-
-    public void setStaff_s(List<Staff> staff_s) {
-        this.staff_s = staff_s;
-    }
-
 }

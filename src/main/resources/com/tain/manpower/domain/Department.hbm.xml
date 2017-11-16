@@ -9,7 +9,7 @@
         </id>
         <property name="depName"/>
 
-        <set name="postSet" table="T_POST" cascade="save-update" inverse="true">
+        <set name="postSet" table="T_POST" inverse="true">
             <key column="DEPT_ID"/>
             <one-to-many class="Post"/>
         </set>

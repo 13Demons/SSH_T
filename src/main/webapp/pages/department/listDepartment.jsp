@@ -1,82 +1,96 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
 
-<link href="${pageContext.request.contextPath}/css/sys.css" type="text/css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/css/sys.css" type="text/css" rel="stylesheet"/>
 
 </head>
 
-<body >
- <table border="0" cellspacing="0" cellpadding="0" width="100%">
-  <tr>
-    <td class="topg"></td>
-  </tr>
+<body>
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+    <tr>
+        <td class="topg"></td>
+    </tr>
 </table>
 
-<table border="0" cellspacing="0" cellpadding="0"  class="wukuang"width="100%">
-  <tr>
-    <td width="1%"><img src="${pageContext.request.contextPath}/images/tleft.gif"/></td>
-    <td width="39%" align="left">[部门管理]</td>
-   
-    <td width="57%"align="right">
-    	<%--添加部门 --%>
-       <a href="pass.action">
-       		<img src="${pageContext.request.contextPath}/images/button/tianjia.gif" />
-       </a>
-      
-    </td>
-    <td width="3%" align="right"><img src="${pageContext.request.contextPath}/images/tright.gif"/></td>
-  </tr>
+<table border="0" cellspacing="0" cellpadding="0" class="wukuang" width="100%">
+    <tr>
+        <td width="1%"><img src="${pageContext.request.contextPath}/images/tleft.gif"/></td>
+        <td width="39%" align="left">[部门管理]</td>
+
+        <td width="57%" align="right">
+            <%--添加部门 --%>
+            <a href="pass.action">
+                <img src="${pageContext.request.contextPath}/images/button/tianjia.gif"/>
+            </a>
+
+        </td>
+        <td width="3%" align="right"><img src="${pageContext.request.contextPath}/images/tright.gif"/></td>
+    </tr>
 </table>
 <table border="0" cellspacing="0" cellpadding="0" style="margin-top:5px;">
-  <tr>
-    <td ><img src="${pageContext.request.contextPath}/images/result.gif"/></td>
-  </tr>
+    <tr>
+        <td><img src="${pageContext.request.contextPath}/images/result.gif"/></td>
+    </tr>
 </table>
 
-<table width="100%" border="1" >
-  
-  <tr class="henglan" style="font-weight:bold;">
-    <td width="6%" align="center">部门名称</td>
-    <td width="7%" align="center">编辑</td>
-  </tr>
+<table width="100%" border="1">
 
-        <s:iterator value="query" var="q">
-            <tr class="tabtd1">
+    <tr class="henglan" style="font-weight:bold;">
+        <td width="6%" align="center">部门名称</td>
+        <td width="7%" align="center">编辑</td>
+    </tr>
+
+    <%--<s:iterator value="query" var="q">--%>
+    <s:iterator value="#session.pageBean.data" var="q">
+        <tr class="tabtd1">
             <td align="center">${q.depName}</td>
             <td width="7%" align="center">
                 <a href="pass.action?depId=${q.depId}&depName=${q.depName}">
-                <img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/>
+                    <img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/>
                 </a>
             </td>
-             </tr>
-        </s:iterator>
+        </tr>
+    </s:iterator>
 
 
-
-
-  
 </table>
-
 
 
 <table border="0" cellspacing="0" cellpadding="0" align="center">
-  <tr>
-    <td align="right">
-    	<span>第1/3页</span>
-        <span>
-        	<a href="#">[首页]</a>&nbsp;&nbsp;
-            <a href="#">[上一页]</a>&nbsp;&nbsp;
-            <a href="#">[下一页]</a>&nbsp;&nbsp;
-            <a href="#">[尾页]</a>
-        </span>
-    </td>
-  </tr>
+    <tr>
+        <td align="right">
+            <span>第<s:property value="#session.pageBean.pageNum"/>/<s:property
+                    value="#session.pageBean.totalPage"/>页</span>
+            <span>
+<a href="findDepartmentByPage">[首页]</a>&nbsp;&nbsp;
+<a href="findDepartmentByPage?pageNum=${session.pageBean.pageNum - 1}">[上一页]</a>&nbsp;&nbsp;
+<s:iterator begin="#session.pageBean.start" end="#session.pageBean.end" var="num">
+    <s:if test="#num <= #session.pageBean.totalPage">
+<a href="findDepartmentByPage?pageNum=${num}">
+<s:property value="#num"/> </a>&nbsp;&nbsp;
+    </s:if>
+</s:iterator>
+<a
+        <c:choose>
+
+            <c:when test="${pageBean.pageNum >= pageBean.totalPage}">href="#"</c:when>
+
+            <c:otherwise>href="findDepartmentByPage?pageNum=${pageBean.pageNum + 1}"</c:otherwise>
+
+        </c:choose>
+>[下一页]</a>&nbsp;&nbsp;
+<a href="findStaffByPage?pageNum=${pageBean.totalPage}">[尾页]</a>
+</spanfindDepartmentByPage
+        </td>
+    </tr>
 </table>
+
+
 </body>
 </html>

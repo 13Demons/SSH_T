@@ -5,6 +5,8 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.tain.department.service.DeptService;
 import com.tain.manpower.domain.Department;
+import com.tain.manpower.utils.PageBean;
+
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -13,26 +15,35 @@ import java.util.List;
  * Created by dllo on 17/11/10.
  */
 public class DeptAction extends ActionSupport implements ModelDriven<Department> {
-    private Department dept=new Department();
-    private String  postId;
+    private Department dept = new Department();
+    String postId;
+    private int pageNum;
+    private int pageSize = 5;
 
     @Resource
     private DeptService deptService;
     private List<Department> query;
 
     //添加
-    public String save(){
-        List<Department> save = deptService.save(dept);
-        ActionContext.getContext().put("deptService",save);
+    public String save() {
+        deptService.save(dept);
         return SUCCESS;
     }
 
     //查询
-    public String query(){
+    public String query() {
         query = deptService.query();
-//        ActionContext.getContext().put("deptService", query);
         return SUCCESS;
+    }
 
+
+    public String findDepartmentByPage() {
+        if (pageNum == 0) {
+            pageNum = 1;
+        }
+        PageBean<Department> all = deptService.findStaffByPage(dept, pageNum, pageSize);
+        ActionContext.getContext().getSession().put("pageBean", all);
+        return SUCCESS;
     }
 
 
@@ -49,12 +60,27 @@ public class DeptAction extends ActionSupport implements ModelDriven<Department>
         this.query = query;
     }
 
-
     public String getPostId() {
         return postId;
     }
 
     public void setPostId(String postId) {
         this.postId = postId;
+    }
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 }

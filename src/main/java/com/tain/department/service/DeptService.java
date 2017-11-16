@@ -1,6 +1,8 @@
 package com.tain.department.service;
 
 import com.tain.manpower.domain.Department;
+import com.tain.manpower.domain.Staff;
+import com.tain.manpower.utils.PageBean;
 
 import java.util.List;
 
@@ -13,6 +15,6 @@ public interface DeptService {
 
     List<Department>query();
 
-
-
+    //分页
+    PageBean<Department> findStaffByPage(Department department, int pageNum , int pageSize);
 }

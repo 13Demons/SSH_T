@@ -6,6 +6,7 @@ import com.tain.manpower.domain.Department;
 import com.tain.manpower.domain.Post;
 import com.tain.manpower.domain.Staff;
 import com.tain.manpower.service.StaffService;
+import com.tain.manpower.utils.PageBean;
 
 import java.util.List;
 
@@ -43,6 +44,11 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public List<Post> getPostByDeptId(String deptId) {
         return staffDao.getPostByDeptId(deptId);
+    }
+
+    @Override
+    public List<Staff> queryAll(String depId, String postId, String staffName) {
+        return staffDao.queryAll(depId,postId,staffName);
     }
 
 

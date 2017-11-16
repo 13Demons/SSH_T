@@ -47,7 +47,7 @@ FONT-SIZE: 12px; COLOR: #4b4b4b; LINE-HEIGHT: 18px; TEXT-DECORATION: none
 					</font> 
 					<br/>
 					<br/>
-					<font color="#ff0000">
+					<font color="#faebd7">
 						<s:actionerror/>
 						<s:fielderror/>
 					</font>

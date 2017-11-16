@@ -10,30 +10,72 @@
 
     <package name="ssh" extends="json-default">
 
+        <!--<interceptors>-->
+            <!--<interceptor name="StaffInterceptor" class="com.tain.manpower.interceptor.StaffInterceptor">-->
+                <!--<param name="includeMethods">login</param>-->
+                <!--<param name="excludeMethods">staff_save,staffQuery,findDepartment,queryAll,add_findDepartment,-->
+                    <!--update_findDepartment,getStaff</param>-->
+            <!--</interceptor>-->
+
+            <!--<interceptor-stack name="myInterceptor">-->
+                <!--<interceptor-ref name="StaffInterceptor"/>-->
+                <!--<interceptor-ref name="defaultStack"/>-->
+            <!--</interceptor-stack>-->
+        <!--</interceptors>-->
+
+        <!--<default-interceptor-ref name="myInterceptor"/>-->
+
+
+
         <default-class-ref class="com.tain.manpower.action.StaffAction"/>
 
         <!--登录-->
         <action name="login"  method="login">
             <result name="success">/pages/frame.jsp</result>
             <result name="error">/pages/login.jsp</result>
+            <result name="input">/pages/login.jsp</result>
         </action>
 
-        <!--显示全部-->
-        <action name="staff_query"  method="query">
-            <result name="success" type="redirectAction">findDepartment</result>
-        </action>
 
 
         <!--添加/编辑-->
         <action name="staff_save" method="save">
-            <result name="success" type="redirectAction">staff_query</result>
+            <result name="success" type="redirectAction">staffQuery</result>
         </action>
 
 
-        <!--list-->
+        <!--查询显示-->
+        <action name="staffQuery"  method="query">
+        <result name="success" type="redirectAction">findDepartment</result>
+        </action>
+
+        <!--二级联动-->
         <action name="findDepartment"  method="findDepartment">
             <result name="success">/pages/staff/listStaff.jsp</result>
         </action>
+
+
+        <!--postId,depId,staffName-->
+        <action name="queryAll" method="queryAll">
+            <result name="success" type="json">
+                <param name="root">staffs</param>
+                <param name="includeProperties">
+                    \[\d\]\.staffId,
+                    \[\d\]\.loginName,
+                    \[\d\]\.staffName,
+                    \[\d\]\.gender,
+                    \[\d\]\.onDutyDate,
+                    \[\d\]\.post,
+                    \[\d\]\.post\.postName,
+                    \[\d\]\.post\.postId,
+                    \[\d\]\.post\.department\.depId,
+                    \[\d\]\.post\.department\.depName
+                </param>
+            </result>
+        </action>
+
+
+
         <!--添加/二级联动-->
         <action name="add_findDepartment"  method="findDepartment">
             <result name="success">/pages/staff/addStaff.jsp</result>
@@ -42,17 +84,12 @@
         <action name="update_findDepartment"  method="findDepartment">
             <result name="success">/pages/staff/editStaff.jsp</result>
         </action>
-
         <action name="getStaff" method="getPostByDeptId">
             <result name="success" type="json">
                 <param name="root">posts</param>
                 <param name="includeProperties">\[\d\]\.postId,\[\d\]\.postName</param>
             </result>
         </action>
-
-
-
-
 
     </package>
 

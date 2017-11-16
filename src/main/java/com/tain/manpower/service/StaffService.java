@@ -3,6 +3,7 @@ package com.tain.manpower.service;
 import com.tain.manpower.domain.Department;
 import com.tain.manpower.domain.Post;
 import com.tain.manpower.domain.Staff;
+import com.tain.manpower.utils.PageBean;
 
 import java.util.List;
 
@@ -19,6 +20,9 @@ public interface StaffService {
     List<Department> findDepartment();
 
     List<Post>getPostByDeptId(String deptId);
+
+
+    List<Staff>queryAll(String depId,String postId,String staffName);
 
 
 }

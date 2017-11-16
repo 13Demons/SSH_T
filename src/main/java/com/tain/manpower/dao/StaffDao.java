@@ -18,4 +18,12 @@ public interface StaffDao {
     List<Department> findDepartment();
     List<Post>getPostByDeptId(String deptId);
 
+
+
+    List<Staff>queryAll(String depId,String postId,String staffName);
+
+
+
 }
+
+

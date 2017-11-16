@@ -1,6 +1,7 @@
 package com.tain.department.dao;
 
 import com.tain.manpower.domain.Department;
+import com.tain.manpower.domain.Staff;
 
 import java.util.List;
 
@@ -13,7 +14,8 @@ public interface DeptDao {
 
     List<Department>query();
 
+    //分页
+    int getTotalDepartment();
 
-
-
+    List<Department> findDepartmentByPage(int startIndex , int pageSize);
 }

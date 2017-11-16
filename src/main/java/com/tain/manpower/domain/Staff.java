@@ -38,6 +38,17 @@ public class Staff {
         this.onDutyDate = onDutyDate;
     }
 
+    @Override
+    public String toString() {
+        return "Staff{" +
+                "staffId='" + staffId + '\'' +
+                ", loginName='" + loginName + '\'' +
+                ", loginPwd='" + loginPwd + '\'' +
+                ", staffName='" + staffName + '\'' +
+                ", gender='" + gender + '\'' +
+                ", onDutyDate=" + onDutyDate +
+                '}';
+    }
 
     public String getStaffId() {
         return staffId;

@@ -12,7 +12,7 @@
 		function changePost(value) {
 
 			var data = new FormData();
-			data.append("depId", value)
+			data.append("post.department.depId", value)
 			var xhr = new XMLHttpRequest();
 			xhr.withCredentials = true;
 
@@ -52,13 +52,7 @@
 			xhr.send(data);
 		}
 
-
-
-
 	</script>
-
-
-
 
 <body class="emp_body">
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
@@ -105,7 +99,6 @@
 	  </tr>
 	 <tr>
 
-
 	    <td width="10%">所属部门：</td>
 	    <td width="20%">
 	    	<select name="post.department.depId" onchange="changePost(this.value)">
@@ -125,8 +118,6 @@
 				<option value="">--请选择职务--</option>
 			</select>
 	    </td>
-
-
 
 	  </tr>
 	   <tr>

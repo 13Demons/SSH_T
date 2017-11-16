@@ -23,6 +23,13 @@
         </action>
 
 
+        <!--分页-->
+        <action name="findDepartmentByPage"
+                method="findDepartmentByPage">
+            <result name="success" type="redirectAction">query</result>
+        </action>
+
+
     </package>
 
 

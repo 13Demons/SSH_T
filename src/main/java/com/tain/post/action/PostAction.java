@@ -18,7 +18,8 @@ import java.util.List;
 public class PostAction extends ActionSupport implements ModelDriven<Post> {
 
     private Post post = new Post();
-    private String postId;
+
+
 
     private String depId;
     private String depName;
@@ -28,6 +29,7 @@ public class PostAction extends ActionSupport implements ModelDriven<Post> {
     @Resource
     private PostService postService;
     private List<Post> query;
+    private List<Post> save;
 
 
     public String query(){
@@ -37,7 +39,7 @@ public class PostAction extends ActionSupport implements ModelDriven<Post> {
 
     public String save(){
         post.setDepartment(new Department(depId,null));
-        postService.save(post);
+        save = postService.save(post);
         return SUCCESS;
     }
 
@@ -65,13 +67,7 @@ public class PostAction extends ActionSupport implements ModelDriven<Post> {
         this.depId = depId;
     }
 
-    public String getPostId() {
-        return postId;
-    }
 
-    public void setPostId(String postId) {
-        this.postId = postId;
-    }
 
     public String getDepName() {
         return depName;
@@ -79,5 +75,13 @@ public class PostAction extends ActionSupport implements ModelDriven<Post> {
 
     public void setDepName(String depName) {
         this.depName = depName;
+    }
+
+    public List<Post> getSave() {
+        return save;
+    }
+
+    public void setSave(List<Post> save) {
+        this.save = save;
     }
 }
