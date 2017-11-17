@@ -5,35 +5,53 @@
         "http://struts.apache.org/dtds/struts-2.5.dtd">
 
 <struts>
+
     <constant name="struts.devMode" value="true"/>
     <constant name="struts.objectFactory" value="spring"/>
 
-    <package name="ssh" extends="json-default">
-
-        <!--<interceptors>-->
-            <!--<interceptor name="StaffInterceptor" class="com.tain.manpower.interceptor.StaffInterceptor">-->
-                <!--<param name="includeMethods">login</param>-->
-                <!--<param name="excludeMethods">staff_save,staffQuery,findDepartment,queryAll,add_findDepartment,-->
-                    <!--update_findDepartment,getStaff</param>-->
-            <!--</interceptor>-->
-
-            <!--<interceptor-stack name="myInterceptor">-->
-                <!--<interceptor-ref name="StaffInterceptor"/>-->
-                <!--<interceptor-ref name="defaultStack"/>-->
-            <!--</interceptor-stack>-->
-        <!--</interceptors>-->
-
-        <!--<default-interceptor-ref name="myInterceptor"/>-->
 
 
+    <package name="Method" extends="json-default">
+        <interceptors>
+        <interceptor name="StaffInterceptor" class="com.tain.manpower.interceptor.StaffInterceptor">
+        <param name="excludeMethods">login</param>
+        </interceptor>
 
-        <default-class-ref class="com.tain.manpower.action.StaffAction"/>
+        <interceptor-stack name="myInterceptor">
+
+        <interceptor-ref name="StaffInterceptor"/>
+        <interceptor-ref name="defaultStack"/>
+
+        </interceptor-stack>
+        </interceptors>
+
+
+        <default-interceptor-ref name="myInterceptor"/>
+
+
+        <global-results>
+            <result name="a">/pages/login.jsp</result>
+        </global-results>
+
+    </package>
+
+
+
+
+
+
+    <package name="ssh" extends="Method">
+
+
+
+        <default-class-ref class="staffAction"/>
 
         <!--登录-->
         <action name="login"  method="login">
             <result name="success">/pages/frame.jsp</result>
             <result name="error">/pages/login.jsp</result>
             <result name="input">/pages/login.jsp</result>
+
         </action>
 
 
@@ -41,17 +59,20 @@
         <!--添加/编辑-->
         <action name="staff_save" method="save">
             <result name="success" type="redirectAction">staffQuery</result>
+
         </action>
 
 
         <!--查询显示-->
         <action name="staffQuery"  method="query">
         <result name="success" type="redirectAction">findDepartment</result>
+
         </action>
 
         <!--二级联动-->
         <action name="findDepartment"  method="findDepartment">
             <result name="success">/pages/staff/listStaff.jsp</result>
+
         </action>
 
 
@@ -72,6 +93,7 @@
                     \[\d\]\.post\.department\.depName
                 </param>
             </result>
+
         </action>
 
 
@@ -79,20 +101,24 @@
         <!--添加/二级联动-->
         <action name="add_findDepartment"  method="findDepartment">
             <result name="success">/pages/staff/addStaff.jsp</result>
+
         </action>
         <!--编辑/二级联动-->
         <action name="update_findDepartment"  method="findDepartment">
             <result name="success">/pages/staff/editStaff.jsp</result>
+
         </action>
         <action name="getStaff" method="getPostByDeptId">
             <result name="success" type="json">
                 <param name="root">posts</param>
                 <param name="includeProperties">\[\d\]\.postId,\[\d\]\.postName</param>
             </result>
+
         </action>
 
         <action name="pageJSP">
             <result name="input">/pages/staff/updPwd.jsp</result>
+
         </action>
         <action name="updateLoginPwd" method="updateLoginPwd">
             <result name="success" type="redirect">/pages/login.jsp</result>

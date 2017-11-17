@@ -6,11 +6,12 @@
 
 <struts>
 
-    <package name="dept" extends="json-default">
+    <package name="dept" extends="Method">
 
-        <default-class-ref class="com.tain.department.action.DeptAction"/>
 
-        <action name="save" method="save">
+        <default-class-ref class="deptAction"/>
+
+        <action name="save"  method="save">
             <result name="success" type="chain">query</result>
         </action>
 
@@ -22,9 +23,8 @@
             <result name="success">/pages/department/addOrEditDepartment.jsp</result>
         </action>
 
-        <action name="findStaffByPage" method="findDeptPage">
-            <result name="success" type="redirectAction">query</result>
-        </action>
+
+
 
 
     </package>

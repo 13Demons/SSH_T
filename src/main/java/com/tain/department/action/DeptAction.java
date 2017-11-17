@@ -5,6 +5,7 @@ import com.tain.department.service.DeptService;
 import com.tain.manpower.Base.BaseAction;
 import com.tain.manpower.domain.Department;
 import com.tain.manpower.utils.PageBean;
+import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -14,32 +15,23 @@ import java.util.List;
  */
 public class DeptAction extends BaseAction<Department,DeptService> {
 
-    @Resource
-    private DeptService deptService;
+
     private List<Department> query;
     private String postId;
-    private int pageNum;
-    private int pageSize=5;
+
 
     //添加&修改
     public String save(){
-        deptService.save(getModel());
+        service.save(getModel());
         return SUCCESS;
     }
     //显示部门
+
     public String query(){
-        query = deptService.query();
+        query = service.query();
         return SUCCESS;
     }
-    //分页
-    public String findDeptPage(){
-        if (pageNum==0){
-            pageNum=1;
-        }
-        PageBean<Department> all = deptService.findDeptByPage(getModel(), pageNum, pageSize);
-        ActionContext.getContext().getSession().put("pageBean",all);
-        return SUCCESS;
-    }
+
 
     public List<Department> getQuery() {
         return query;
@@ -57,19 +49,5 @@ public class DeptAction extends BaseAction<Department,DeptService> {
         this.postId = postId;
     }
 
-    public int getPageNum() {
-        return pageNum;
-    }
 
-    public void setPageNum(int pageNum) {
-        this.pageNum = pageNum;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
 }

@@ -5,9 +5,11 @@
         "http://struts.apache.org/dtds/struts-2.5.dtd">
 
 <struts>
-    <package name="psot" extends="json-default" >
+    <package name="psot" extends="Method" >
 
-        <default-class-ref class="com.tain.post.action.PostAction"/>
+
+
+        <default-class-ref class="postAction"/>
 
         <action name="post_save" method="save">
             <result name="success" type="chain">postquery</result>
@@ -19,7 +21,7 @@
         </action>
 
 
-        <action name="postDeptquery" class="com.tain.department.action.DeptAction" method="query">
+        <action name="postDeptquery" class="deptAction" method="query">
             <result name="success">/pages/post/addOrEditPost.jsp</result>
         </action>
 

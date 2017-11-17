@@ -14,6 +14,13 @@
     </bean>
 
 
+    <!--<bean id="postAction" class="com.tain.post.action.PostAction" scope="prototype">-->
+        <!--<property name="service" ref="postService"></property>-->
+    <!--</bean>-->
+
+    <bean id="postAction" class="com.tain.post.action.PostAction" scope="prototype">
+        <property name="service" ref="postService"/>
+    </bean>
 
 
 

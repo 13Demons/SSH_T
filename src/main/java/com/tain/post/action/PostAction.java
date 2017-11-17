@@ -17,19 +17,18 @@ import java.util.List;
  */
 public class PostAction extends BaseAction<Post,PostService> {
 
-    @Resource
-    private PostService postService;
+
     private List<Post> query;
     private List<Post> save;
 
     public String query(){
 
-        query = postService.query();
+        query = service.query();
         return SUCCESS;
     }
 
     public String save(){
-        save = postService.save(getModel());
+        save = service.save(getModel());
         return SUCCESS;
     }
 

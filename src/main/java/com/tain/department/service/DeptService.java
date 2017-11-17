@@ -14,5 +14,5 @@ public interface DeptService {
     List<Department>save(Department department);
 
     List<Department>query();
-    PageBean<Department> findDeptByPage(Department department, int pageNum , int pageSize);
+
 }

@@ -27,6 +27,8 @@ public class DeptDaoImpl extends HibernateDaoSupport implements DeptDao {
         return null;
     }
 
+
+
     //查询
     //查询所有部门数据库中内容
     @Override
@@ -37,20 +39,5 @@ public class DeptDaoImpl extends HibernateDaoSupport implements DeptDao {
 
     }
 
-    @Override
-    public int getTotalDept() {
-        String sql = "select count(d) from Department d where 1=1";
-        List<Long> find = (List<Long>) getHibernateTemplate().find(sql);
-        if (find!=null){
-            return find.get(0).intValue();
-        }
-        return 0;
-    }
-
-    @Override
-    public List<Department> findDeptByPage(int startIndex, int pageSize) {
-        String sql="from Department where 1=1";
-        return getHibernateTemplate().execute(new PageHibernateCallback<Department>(sql,startIndex,pageSize));
-    }
 
 }

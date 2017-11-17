@@ -10,8 +10,8 @@ import org.apache.struts2.ServletActionContext;
 public class StaffInterceptor extends MethodFilterInterceptor {
     @Override
     protected String doIntercept(ActionInvocation actionInvocation) throws Exception {
-        Object attribute = ServletActionContext.getServletContext().getAttribute("user");
-        if (attribute==null){
+        String attribute = (String) ServletActionContext.getServletContext().getAttribute("logName");
+        if ("".equals(attribute)){
             return "a";
         }
         return actionInvocation.invoke();

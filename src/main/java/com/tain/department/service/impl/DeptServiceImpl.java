@@ -26,20 +26,8 @@ public class DeptServiceImpl implements DeptService {
     public List<Department> query() {
         return deptDao.query();
     }
-    @Override
-    public PageBean<Department> findDeptByPage(Department department, int pageNum, int pageSize) {
-        int totalDept = deptDao.getTotalDept();
-        PageBean<Department>pageBean = new PageBean<Department>(pageNum,pageSize,totalDept);
-        List<Department> data = deptDao.findDeptByPage(pageBean.getStartIndex(), pageBean.getPageSize());
-        pageBean.setData(data);
-        return pageBean;
-    }
-
-
 
     public void setDeptDao(DeptDao deptDao) {
         this.deptDao = deptDao;
     }
-
-
 }

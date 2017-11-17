@@ -31,17 +31,6 @@
     </bean>
 
 
-
-    <bean id="staffDao" class="com.tain.manpower.dao.impl.StaffDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
-
-    <bean id="staffService" class="com.tain.manpower.service.impl.StaffServiceImpl">
-        <property name="staffDao" ref="staffDao"/>
-    </bean>
-
-
-
     <!--创建管理事务对象-->
     <bean id="transactionManager"
           class="org.springframework.orm.hibernate5.HibernateTransactionManager">

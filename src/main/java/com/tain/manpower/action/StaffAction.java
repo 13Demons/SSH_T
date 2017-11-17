@@ -16,8 +16,7 @@ import java.util.List;
  * Created by dllo on 17/11/9.
  */
 public class StaffAction extends BaseAction<Staff,StaffService> {
-    @Resource
-    private StaffService staffService;
+
     private List<Staff> staffs;
     private List<Department> department;
     private List<Post> posts;
@@ -27,12 +26,16 @@ public class StaffAction extends BaseAction<Staff,StaffService> {
     private String Pwd;
     private String StaffPwd;
 
+
     public String login() {
 
-        staffs = staffService.login(getModel().getLoginName(), getModel().getLoginPwd());
+        staffs = service.login(getModel().getLoginName(), getModel().getLoginPwd());
+        //关于登录传值loginName
+        ActionContext.getContext().getSession().put("loginName",getModel().getLoginName());
         if (staffs.isEmpty()) {
             return ERROR;
         }
+        //关于更新密码的传值
         ActionContext.getContext().getSession().put("staff",staffs.get(0));
         return SUCCESS;
     }
@@ -40,7 +43,7 @@ public class StaffAction extends BaseAction<Staff,StaffService> {
     //显示
     @SkipValidation
     public String query() {
-        staffs = staffService.query();
+        staffs = service.query();
         ActionContext.getContext().getSession().put("staff", staffs);
         return SUCCESS;
     }
@@ -48,7 +51,7 @@ public class StaffAction extends BaseAction<Staff,StaffService> {
     //二级联动
     @SkipValidation
     public String findDepartment() {
-        department = staffService.findDepartment();
+        department = service.findDepartment();
         ActionContext.getContext().put("department", department);
         staffs = (List<Staff>) ActionContext.getContext().getSession().get("staff");
         return SUCCESS;
@@ -57,13 +60,13 @@ public class StaffAction extends BaseAction<Staff,StaffService> {
     //添加修改
     @SkipValidation
     public String save() {
-        staffService.save(getModel());
+        service.save(getModel());
         return SUCCESS;
     }
 
     @SkipValidation
     public String getPostByDeptId() {
-        posts = staffService.getPostByDeptId(getModel().getPost().getDepartment().getDepId());
+        posts = service.getPostByDeptId(getModel().getPost().getDepartment().getDepId());
         return SUCCESS;
     }
 
@@ -72,7 +75,7 @@ public class StaffAction extends BaseAction<Staff,StaffService> {
         String depId = getModel().getPost().getDepartment().getDepId();
         String postId = getModel().getPost().getPostId();
         String staffName = getModel().getStaffName();
-        staffs = staffService.queryAll(depId, postId, staffName);
+        staffs = service.queryAll(depId, postId, staffName);
         return SUCCESS;
     }
 
@@ -84,12 +87,10 @@ public class StaffAction extends BaseAction<Staff,StaffService> {
             addActionError("密码输入错误");
             return ERROR;
         }else {
-            staffService.LoginPwd(staff,StaffPwd);
+            service.LoginPwd(staff,StaffPwd);
             return SUCCESS;
         }
     }
-
-
 
     public List<Staff> getStaffs() {
         return staffs;
