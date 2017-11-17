@@ -97,7 +97,7 @@
 									<td width="51" valign="middle">
 										<font color="#FFFFFF">
 											欢迎您：
-											${sessionScope.get("username")}
+											${loginName}
 										</font>
 									</td>
 								</tr>
@@ -127,7 +127,7 @@
 										<%--是否使用弹出框？ javascript:modifypsw(); 
 										<a href="javascript:void(0)" onclick="javascript:modifypsw();"><font color="ffffff">更改口令</font></a>
 										--%>
-										<a href="${pageContext.request.contextPath}/pages/staff/updPwd.jsp" target="right">
+										<a href="pageJSP.action" target="right">
 											<font color="ffffff">更改密码</font>
 										</a>
 									</td>

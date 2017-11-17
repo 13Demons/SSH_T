@@ -1,12 +1,10 @@
 package com.tain.department.action;
 
 import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
 import com.tain.department.service.DeptService;
+import com.tain.manpower.Base.BaseAction;
 import com.tain.manpower.domain.Department;
 import com.tain.manpower.utils.PageBean;
-
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -14,42 +12,33 @@ import java.util.List;
 /**
  * Created by dllo on 17/11/10.
  */
-public class DeptAction extends ActionSupport implements ModelDriven<Department> {
-    private Department dept = new Department();
-    String postId;
-    private int pageNum;
-    private int pageSize = 5;
+public class DeptAction extends BaseAction<Department,DeptService> {
 
     @Resource
     private DeptService deptService;
     private List<Department> query;
+    private String postId;
+    private int pageNum;
+    private int pageSize=5;
 
-    //添加
-    public String save() {
-        deptService.save(dept);
+    //添加&修改
+    public String save(){
+        deptService.save(getModel());
         return SUCCESS;
     }
-
-    //查询
-    public String query() {
+    //显示部门
+    public String query(){
         query = deptService.query();
         return SUCCESS;
     }
-
-
-    public String findDepartmentByPage() {
-        if (pageNum == 0) {
-            pageNum = 1;
+    //分页
+    public String findDeptPage(){
+        if (pageNum==0){
+            pageNum=1;
         }
-        PageBean<Department> all = deptService.findStaffByPage(dept, pageNum, pageSize);
-        ActionContext.getContext().getSession().put("pageBean", all);
+        PageBean<Department> all = deptService.findDeptByPage(getModel(), pageNum, pageSize);
+        ActionContext.getContext().getSession().put("pageBean",all);
         return SUCCESS;
-    }
-
-
-    @Override
-    public Department getModel() {
-        return dept;
     }
 
     public List<Department> getQuery() {

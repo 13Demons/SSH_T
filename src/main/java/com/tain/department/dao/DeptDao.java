@@ -14,8 +14,7 @@ public interface DeptDao {
 
     List<Department>query();
 
-    //分页
-    int getTotalDepartment();
+    int getTotalDept();
 
-    List<Department> findDepartmentByPage(int startIndex , int pageSize);
+    List<Department>findDeptByPage(int startIndex , int pageSize);
 }

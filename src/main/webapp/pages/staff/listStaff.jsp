@@ -35,7 +35,7 @@
                     for (var i = 0; i < length; i++) {
                         serverSelect.removeChild(optionEle[0]);
                     }
-                    serverSelect.innerHTML = "<option value=''>--请选择职务--</option>";
+                    serverSelect.innerHTML = "<option value='-1'>--请选择职务--</option>";
                     // 将json数据插入到option中
                     for (var j = 0; j < json.length; j++) {
                         // 创建一个option标签
@@ -150,7 +150,7 @@
 
             <%--高级查询--%>
             <a href="javascript:void(0)" onclick="qwer()">
-            <img src="${pageContext.request.contextPath}/images/button/gaojichaxun.gif"/>
+                <img src="${pageContext.request.contextPath}/images/button/gaojichaxun.gif"/>
             </a>
 
             <%--员工添加--%>
@@ -173,9 +173,9 @@
             <td width="200px">
 
                 <select name="post.department.depId" onchange="changePost(this.value)" id="post.department.deptId">
-                    <option value="">--请选择部门--</option>
+                    <option value="-1">--请选择部门--</option>
 
-                    <s:iterator value="departmentList" var="dept">
+                    <s:iterator value="department" var="dept">
                         <option value="${dept.depId}">${dept.depName}</option>
                     </s:iterator>
 
@@ -186,12 +186,12 @@
             <td width="80px">职务：</td>
             <td width="200px">
                 <select name="post.postId" id="post.postId">
-                    <option value="${postId}">--请选择职务--</option>
+                    <option value="-1">--请选择职务--</option>
                 </select>
             </td>
 
             <td width="80px">姓名：</td>
-            <td width="200px"><input type="text" name="staff.staffName" size="12" id="staffName"/></td>
+            <td width="200px"><input type="text" name="staff.staffName" size="12" id="staffName" value=""/></td>
             <td></td>
         </tr>
     </table>
@@ -220,7 +220,7 @@
     <%--<tbody id="td">--%>
 
     <%--</tbody>--%>
-<%--${staffs}--%>
+    <%--${staffs}--%>
 
 
 

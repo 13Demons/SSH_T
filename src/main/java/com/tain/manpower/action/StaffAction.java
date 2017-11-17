@@ -1,9 +1,8 @@
 package com.tain.manpower.action;
 
 import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
 
+import com.tain.manpower.Base.BaseAction;
 import com.tain.manpower.domain.Department;
 import com.tain.manpower.domain.Post;
 import com.tain.manpower.domain.Staff;
@@ -16,86 +15,81 @@ import java.util.List;
 /**
  * Created by dllo on 17/11/9.
  */
-public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
-    private Staff staff = new Staff();
-
+public class StaffAction extends BaseAction<Staff,StaffService> {
     @Resource
     private StaffService staffService;
-
     private List<Staff> staffs;
-    private List<Department> departmentList;
+    private List<Department> department;
     private List<Post> posts;
-    private String staffId;
 
 
+    private String password;
+    private String Pwd;
+    private String StaffPwd;
 
-    //登录
     public String login() {
-        List<Staff> staffs = staffService.login(staff.getLoginName(), staff.getLoginPwd());
+
+        staffs = staffService.login(getModel().getLoginName(), getModel().getLoginPwd());
         if (staffs.isEmpty()) {
             return ERROR;
         }
-        ActionContext.getContext().getSession().put("username", staffs.get(0).getStaffName());
+        ActionContext.getContext().getSession().put("staff",staffs.get(0));
         return SUCCESS;
     }
 
-    //显示全部
+    //显示
     @SkipValidation
     public String query() {
-        //所有部门获取到
         staffs = staffService.query();
-        ActionContext.getContext().getSession().put("staff",staffs);
+        ActionContext.getContext().getSession().put("staff", staffs);
         return SUCCESS;
-
     }
 
     //二级联动
     @SkipValidation
-    public String findDepartment(){
-        ActionContext.getContext().getSession().put("staffId",staffId);
-        System.out.println(staffId);
-        departmentList = staffService.findDepartment();
+    public String findDepartment() {
+        department = staffService.findDepartment();
+        ActionContext.getContext().put("department", department);
         staffs = (List<Staff>) ActionContext.getContext().getSession().get("staff");
         return SUCCESS;
     }
 
-
-    //添加-修改
+    //添加修改
     @SkipValidation
-    public String save(){
-        System.out.println(staff.getStaffId()+"********");
-        staff.setStaffId(staffId);
-        staffService.save(staff);
+    public String save() {
+        staffService.save(getModel());
         return SUCCESS;
     }
 
     @SkipValidation
-    public String getPostByDeptId(){
-        posts = staffService.getPostByDeptId(staff.getPost().getDepartment().getDepId());
+    public String getPostByDeptId() {
+        posts = staffService.getPostByDeptId(getModel().getPost().getDepartment().getDepId());
         return SUCCESS;
     }
 
-
-
-    //psotId depId staffName
     @SkipValidation
-    public String queryAll(){
-        String depId    = staff.getPost().getDepartment().getDepId();
-        String postId   = staff.getPost().getPostId();
-        String staffName = staff.getStaffName();
-        staffs = staffService.queryAll(
-                depId,
-                postId,
-                staffName);
-        System.out.println("staffs.size():" + staffs.size());
+    public String queryAll() {
+        String depId = getModel().getPost().getDepartment().getDepId();
+        String postId = getModel().getPost().getPostId();
+        String staffName = getModel().getStaffName();
+        staffs = staffService.queryAll(depId, postId, staffName);
         return SUCCESS;
     }
 
-
-    @Override
-    public Staff getModel() {
-        return staff;
+    //更改密码
+    @SkipValidation
+    public String updateLoginPwd(){
+        Staff staff = (Staff) ActionContext.getContext().getSession().get("staff");
+        if (!password.equals(staff.getLoginPwd())||!Pwd.equals(StaffPwd)){
+            addActionError("密码输入错误");
+            return ERROR;
+        }else {
+            staffService.LoginPwd(staff,StaffPwd);
+            return SUCCESS;
+        }
     }
+
+
 
     public List<Staff> getStaffs() {
         return staffs;
@@ -105,13 +99,12 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
         this.staffs = staffs;
     }
 
-
-    public List<Department> getDepartmentList() {
-        return departmentList;
+    public List<Department> getDepartment() {
+        return department;
     }
 
-    public void setDepartmentList(List<Department> departmentList) {
-        this.departmentList = departmentList;
+    public void setDepartment(List<Department> department) {
+        this.department = department;
     }
 
     public List<Post> getPosts() {
@@ -122,11 +115,27 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
         this.posts = posts;
     }
 
-    public String getStaffId() {
-        return staffId;
+    public String getPassword() {
+        return password;
     }
 
-    public void setStaffId(String staffId) {
-        this.staffId = staffId;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPwd() {
+        return Pwd;
+    }
+
+    public void setPwd(String pwd) {
+        Pwd = pwd;
+    }
+
+    public String getStaffPwd() {
+        return StaffPwd;
+    }
+
+    public void setStaffPwd(String staffPwd) {
+        StaffPwd = staffPwd;
     }
 }

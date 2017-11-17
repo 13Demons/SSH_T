@@ -1,4 +1,5 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="c" uri="/struts-tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -46,8 +47,7 @@
         <td width="7%" align="center">编辑</td>
     </tr>
 
-    <%--<s:iterator value="query" var="q">--%>
-    <s:iterator value="#session.pageBean.data" var="q">
+    <s:iterator value="query" var="q">
         <tr class="tabtd1">
             <td align="center">${q.depName}</td>
             <td width="7%" align="center">
@@ -62,34 +62,8 @@
 </table>
 
 
-<table border="0" cellspacing="0" cellpadding="0" align="center">
-    <tr>
-        <td align="right">
-            <span>第<s:property value="#session.pageBean.pageNum"/>/<s:property
-                    value="#session.pageBean.totalPage"/>页</span>
-            <span>
-<a href="findDepartmentByPage">[首页]</a>&nbsp;&nbsp;
-<a href="findDepartmentByPage?pageNum=${session.pageBean.pageNum - 1}">[上一页]</a>&nbsp;&nbsp;
-<s:iterator begin="#session.pageBean.start" end="#session.pageBean.end" var="num">
-    <s:if test="#num <= #session.pageBean.totalPage">
-<a href="findDepartmentByPage?pageNum=${num}">
-<s:property value="#num"/> </a>&nbsp;&nbsp;
-    </s:if>
-</s:iterator>
-<a
-        <c:choose>
 
-            <c:when test="${pageBean.pageNum >= pageBean.totalPage}">href="#"</c:when>
 
-            <c:otherwise>href="findDepartmentByPage?pageNum=${pageBean.pageNum + 1}"</c:otherwise>
-
-        </c:choose>
->[下一页]</a>&nbsp;&nbsp;
-<a href="findStaffByPage?pageNum=${pageBean.totalPage}">[尾页]</a>
-</spanfindDepartmentByPage
-        </td>
-    </tr>
-</table>
 
 
 </body>

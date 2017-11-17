@@ -22,10 +22,7 @@
             <result name="success">/pages/department/addOrEditDepartment.jsp</result>
         </action>
 
-
-        <!--分页-->
-        <action name="findDepartmentByPage"
-                method="findDepartmentByPage">
+        <action name="findStaffByPage" method="findDeptPage">
             <result name="success" type="redirectAction">query</result>
         </action>
 

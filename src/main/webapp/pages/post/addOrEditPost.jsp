@@ -48,7 +48,7 @@
 	    <td>
 
             <option value="${depId}">${depName}</option>
-            <select name="depId">
+            <select name="department.depId">
                 <option value="department.depName">----请--选--择----</option>
             <s:iterator value="query" var="q">
                 <option value="${q.depId}">${q.depName}</option>

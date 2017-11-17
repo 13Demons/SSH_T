@@ -58,6 +58,7 @@
             <td align="center">${department.depName}</td>
             <td align="center">${postName}</td>
             <td width="7%" align="center">
+
                 <a href="postDeptquery.action?postId=${postId}&
                             &depId=${department.depId}">
                 <img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/></a>

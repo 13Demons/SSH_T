@@ -24,6 +24,7 @@ public interface StaffService {
 
     List<Staff>queryAll(String depId,String postId,String staffName);
 
+    void LoginPwd(Staff staff,String password);
 
 }
 

@@ -14,7 +14,5 @@ public interface DeptService {
     List<Department>save(Department department);
 
     List<Department>query();
-
-    //分页
-    PageBean<Department> findStaffByPage(Department department, int pageNum , int pageSize);
+    PageBean<Department> findDeptByPage(Department department, int pageNum , int pageSize);
 }

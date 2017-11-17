@@ -38,7 +38,7 @@ public class DeptDaoImpl extends HibernateDaoSupport implements DeptDao {
     }
 
     @Override
-    public int getTotalDepartment() {
+    public int getTotalDept() {
         String sql = "select count(d) from Department d where 1=1";
         List<Long> find = (List<Long>) getHibernateTemplate().find(sql);
         if (find!=null){
@@ -47,13 +47,10 @@ public class DeptDaoImpl extends HibernateDaoSupport implements DeptDao {
         return 0;
     }
 
-
-
     @Override
-    public List<Department> findDepartmentByPage(int startIndex, int pageSize) {
-        String sql = "from Department where 1=1";
+    public List<Department> findDeptByPage(int startIndex, int pageSize) {
+        String sql="from Department where 1=1";
         return getHibernateTemplate().execute(new PageHibernateCallback<Department>(sql,startIndex,pageSize));
     }
-
 
 }

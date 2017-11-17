@@ -51,6 +51,11 @@ public class StaffServiceImpl implements StaffService {
         return staffDao.queryAll(depId,postId,staffName);
     }
 
+    @Override
+    public void LoginPwd(Staff staff, String password) {
+        staffDao.LoginPwd(staff,password);
+    }
+
 
     public void setStaffDao(StaffDaoImpl staffDao) {
         this.staffDao = staffDao;

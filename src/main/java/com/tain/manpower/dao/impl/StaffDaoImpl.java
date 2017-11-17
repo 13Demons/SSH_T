@@ -64,45 +64,52 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
 
     @Override
     public List<Staff> queryAll(String depId, String postId, String staffName) {
-        if ("".equals(depId)||depId==null
-                &&"".equals(postId)||postId==null
-                &&"".equals(staffName)||staffName==null){
+        if (depId.equals("-1")&&postId.equals("-1")&&staffName.equals("")){
             String sql ="from Staff T_STAFF";
             List<Staff> list = (List<Staff>) getHibernateTemplate().find(sql);
             return list;
-        }else if (depId!=null||!"".equals(depId)
-                &&"".equals(postId)||postId==null
-                &&"".equals(staffName)||staffName==null){
+        }
+        if (postId.equals("-1")&&staffName.equals("")){
             String sql = "from Staff T_STAFF WHERE post.department.depId=?";
             List<Staff> list = (List<Staff>) getHibernateTemplate().find(sql,depId);
             return list;
-        }else if ("".equals(depId)||depId==null
-                &&"".equals(postId)||postId==null
-                &&staffName!=null||!"".equals(staffName)){
+        }
+        if (depId.equals("-1")&&postId.equals("-1")){
             String sql = "from Staff T_STAFF WHERE staffName=?";
             List<Staff> list = (List<Staff>) getHibernateTemplate().find(sql,staffName);
             return list;
-        }else if (postId!=null||!"".equals(postId)
-                &&depId!=null||!"".equals(depId)
-                &&"".equals(staffName)||staffName!=null){
+        }
+        if (staffName.equals("")){
             String sql ="from Staff T_STAFF WHERE post.department.depId=? and post.postId=?";
             List<Staff> list = (List<Staff>) getHibernateTemplate().find(sql, depId, postId);
             return list;
-        }else if (depId!=null||!"".equals(depId)
-                &&"".equals(postId)||postId==null
-                &&staffName!=null||!"".equals(staffName)){
+        }
+        if (postId.equals("-1")){
             String sql="from Staff T_STAFF WHERE post.department.depId=? and staffName=?";
             List<Staff> list = (List<Staff>) getHibernateTemplate().find(sql,depId,staffName);
             return list;
-        } else if (depId!=null||!"".equals(depId)
-                &&postId!=null||!"".equals(postId)
-                &&staffName!=null||!"".equals(staffName)){
-            String sql = "from Staff T_STAFF WHERE post.department.depId=? and post.postId=? and staffName=?";
-            List<Staff> list = (List<Staff>) getHibernateTemplate().find(sql,depId,postId,staffName);
-            return list;
         }
-        return null;
+
+        String sql = "from Staff T_STAFF WHERE post.department.depId=? and post.postId=? and staffName=?";
+        List<Staff> list = (List<Staff>) getHibernateTemplate().find(sql,depId,postId,staffName);
+        return list;
+
     }
+
+
+    //更换密码
+    @Override
+    public void LoginPwd(Staff staff, String password) {
+        List<Staff> staffList = (List<Staff>) getHibernateTemplate().find("from Staff staff where staff.loginName=?", staff.getLoginName());
+        if (staffList.size()>0){
+            Staff staff1 = staffList.get(0);
+            staff1.setLoginPwd(password);
+            getHibernateTemplate().update(staff1);
+        }
+    }
+
+
+
 
 }
 
