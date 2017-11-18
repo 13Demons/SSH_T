@@ -36,7 +36,7 @@ public class StaffAction extends BaseAction<Staff,StaffService> {
         //获取登录名字,登录密码
         staffs = service.login(getModel().getLoginName(), getModel().getLoginPwd());
         //关于登录传值loginName
-        //ActionContext.getContext().getSession().put("loginName",getModel().getLoginName());
+        ActionContext.getContext().getSession().put("loginName",getModel().getLoginName());
         if (staffs.isEmpty()) {
             return ERROR;
         }
@@ -113,6 +113,7 @@ public class StaffAction extends BaseAction<Staff,StaffService> {
         HttpServletRequest request = ServletActionContext.getRequest();
         HttpSession session = request.getSession();
         session.invalidate();
+//        ActionContext.getContext().getSession().remove(getModel().getLoginName());
         return SUCCESS;
     }
 

@@ -8,10 +8,11 @@ import org.apache.struts2.ServletActionContext;
  * Created by dllo on 17/11/16.
  */
 public class StaffInterceptor extends MethodFilterInterceptor {
+
     @Override
     protected String doIntercept(ActionInvocation actionInvocation) throws Exception {
-        String attribute = (String) ServletActionContext.getServletContext().getAttribute("logName");
-        if ("".equals(attribute)){
+        Object login = ServletActionContext.getContext().getSession().get("login");
+        if (login == null){
             return "a";
         }
         return actionInvocation.invoke();
