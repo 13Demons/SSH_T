@@ -15,4 +15,6 @@ public interface DeptService {
 
     List<Department>query();
 
+    List<Department>getListByPage(int offSet,int length);
+
 }

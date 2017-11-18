@@ -12,6 +12,10 @@ import java.util.List;
  */
 public class PostDaoImpl extends HibernateDaoSupport implements PostDao {
 
+    /**
+     * 查询数据库中职位
+     * @return
+     */
     @Override
     public List<Post> query() {
         String sql = "from Post T_POST";
@@ -19,6 +23,11 @@ public class PostDaoImpl extends HibernateDaoSupport implements PostDao {
         return list;
     }
 
+    /**
+     * 添加&&编译
+     * @param post
+     * @return
+     */
     @Override
     public List<Post> save(Post post) {
         if ("".equals(post.getPostId())){

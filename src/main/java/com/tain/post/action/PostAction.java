@@ -2,6 +2,7 @@ package com.tain.post.action;
 
 
 
+import com.opensymphony.xwork2.ActionContext;
 import com.tain.manpower.Base.BaseAction;
 
 import com.tain.manpower.domain.Department;
@@ -17,19 +18,31 @@ import java.util.List;
  */
 public class PostAction extends BaseAction<Post,PostService> {
 
-
     private List<Post> query;
     private List<Post> save;
 
+    /**
+     * 查询全部
+     * @return
+     */
     public String query(){
-
         query = service.query();
         return SUCCESS;
     }
 
+    /**
+     * 添加&编译
+     * @return
+     */
     public String save(){
+        System.out.println(getModel().getPostId());
+        System.out.println(getModel().getDepartment().getDepId());
+//        ActionContext.getContext().getSession().get(getModel().getPostId() );
         save = service.save(getModel());
+//        System.out.println(getModel().getPostId());
+//        System.out.println(getModel().getDepartment().getDepId());
         return SUCCESS;
+
     }
 
     public List<Post> getSave() {

@@ -25,12 +25,10 @@
    
     <td width="57%"align="right">
 
-
     	<%--添加职务 --%>
        <a href="postDeptquery.action"}>
        	<img src="${departmnet.depName}/images/button/tianjia.gif" />
        </a>
-
 
     </td>
     <td width="3%" align="right"><img src="${pageContext.request.contextPath}/images/tright.gif"/></td>
@@ -50,8 +48,6 @@
     <td width="7%" align="center">编辑</td>
   </tr>
 
-
-
     <s:iterator value="query">
         <tr class="tabtd1">
             <%--<td align="center">${department.depName}</td>--%>
@@ -59,18 +55,13 @@
             <td align="center">${postName}</td>
             <td width="7%" align="center">
 
-                <a href="postDeptquery.action?postId=${postId}&
-                            &depId=${department.depId}">
-                <img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/></a>
+                <%--编译--%>
+                <a href="postDeptquery.action?postId=${postId}&&depId=${department.depId}">
+                <img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/>
+                </a>
             </td>
         </tr>
     </s:iterator>
-
-
-
-
-
-
 
 
 </table>
@@ -88,5 +79,6 @@
     </td>
   </tr>
 </table>
+
 </body>
 </html>

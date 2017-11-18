@@ -27,6 +27,11 @@ public class DeptServiceImpl implements DeptService {
         return deptDao.query();
     }
 
+    @Override
+    public List<Department> getListByPage(int offSet, int length) {
+        return deptDao.getListByPage(offSet,length);
+    }
+
     public void setDeptDao(DeptDao deptDao) {
         this.deptDao = deptDao;
     }

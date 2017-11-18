@@ -5,40 +5,27 @@
         "http://struts.apache.org/dtds/struts-2.5.dtd">
 
 <struts>
+
     <package name="psot" extends="Method" >
-
-
 
         <default-class-ref class="postAction"/>
 
+        <!--添加&编辑-->
         <action name="post_save" method="save">
-            <result name="success" type="chain">postquery</result>
+            <result name="success" type="redirectAction">postquery</result>
         </action>
 
-
+        <!--显示全部-->
         <action name="postquery" method="query">
             <result name="success">/pages/post/listPost.jsp</result>
         </action>
 
-
+        <!--添加&编译完成直接跳回显示页面-->
+        <!--添加&编译要获取部门的Id-->
         <action name="postDeptquery" class="deptAction" method="query">
             <result name="success">/pages/post/addOrEditPost.jsp</result>
         </action>
 
-
-        <action name="post_class">
-            <result name="success">/pages/post/addOrEditPost.jsp</result>
-        </action>
-
-
-
-
-
     </package>
-
-
-
-
-
 
 </struts>

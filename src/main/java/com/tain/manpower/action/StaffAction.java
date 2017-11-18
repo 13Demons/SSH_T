@@ -7,9 +7,12 @@ import com.tain.manpower.domain.Department;
 import com.tain.manpower.domain.Post;
 import com.tain.manpower.domain.Staff;
 import com.tain.manpower.service.StaffService;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -21,17 +24,19 @@ public class StaffAction extends BaseAction<Staff,StaffService> {
     private List<Department> department;
     private List<Post> posts;
 
-
     private String password;
     private String Pwd;
     private String StaffPwd;
 
-
+    /**
+     * 登录
+     * @return
+     */
     public String login() {
-
+        //获取登录名字,登录密码
         staffs = service.login(getModel().getLoginName(), getModel().getLoginPwd());
         //关于登录传值loginName
-        ActionContext.getContext().getSession().put("loginName",getModel().getLoginName());
+        //ActionContext.getContext().getSession().put("loginName",getModel().getLoginName());
         if (staffs.isEmpty()) {
             return ERROR;
         }
@@ -40,36 +45,57 @@ public class StaffAction extends BaseAction<Staff,StaffService> {
         return SUCCESS;
     }
 
-    //显示
+    /**
+     * 显示全部
+     * @return
+     */
     @SkipValidation
     public String query() {
         staffs = service.query();
+        //关于显示传值
         ActionContext.getContext().getSession().put("staff", staffs);
         return SUCCESS;
     }
 
-    //二级联动
-    @SkipValidation
-    public String findDepartment() {
-        department = service.findDepartment();
-        ActionContext.getContext().put("department", department);
-        staffs = (List<Staff>) ActionContext.getContext().getSession().get("staff");
-        return SUCCESS;
-    }
-
-    //添加修改
+    /**
+     * 添加&编辑
+     * @return
+     */
     @SkipValidation
     public String save() {
         service.save(getModel());
         return SUCCESS;
     }
 
+    /**
+     * 二级联动(部门)
+     * @return
+     */
+    @SkipValidation
+    public String findDepartment() {
+        department = service.findDepartment();
+        //二级联动传值
+        ActionContext.getContext().put("department", department);
+        //关于显示
+        staffs = (List<Staff>) ActionContext.getContext().getSession().get("staff");
+        return SUCCESS;
+    }
+
+    /**
+     * 二级联动(职位Id)
+     * @return
+     */
     @SkipValidation
     public String getPostByDeptId() {
         posts = service.getPostByDeptId(getModel().getPost().getDepartment().getDepId());
         return SUCCESS;
     }
 
+    /**
+     * 高级搜索
+     * 二级联动
+     * @return
+     */
     @SkipValidation
     public String queryAll() {
         String depId = getModel().getPost().getDepartment().getDepId();
@@ -79,7 +105,21 @@ public class StaffAction extends BaseAction<Staff,StaffService> {
         return SUCCESS;
     }
 
-    //更改密码
+    /**
+     * 重新登录
+     */
+    @SkipValidation
+    public String anew(){
+        HttpServletRequest request = ServletActionContext.getRequest();
+        HttpSession session = request.getSession();
+        session.invalidate();
+        return SUCCESS;
+    }
+
+    /**
+     * 更改密码
+     * @return
+     */
     @SkipValidation
     public String updateLoginPwd(){
         Staff staff = (Staff) ActionContext.getContext().getSession().get("staff");

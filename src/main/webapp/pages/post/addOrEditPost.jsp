@@ -35,9 +35,7 @@
   </tr>
 </table>
 
-
-
-
+<%--添加&编辑--%>
 <form action="post_save.action" method="post">
 
     <input type="hidden" name="postId" value="${postId}">
@@ -46,13 +44,14 @@
 	 <tr>
 	    <td>选择部门：</td>
 	    <td>
-
             <option value="${depId}">${depName}</option>
             <select name="department.depId">
                 <option value="department.depName">----请--选--择----</option>
+            <%--遍历部门中的Id和Name--%>
             <s:iterator value="query" var="q">
                 <option value="${q.depId}">${q.depName}</option>
             </s:iterator>
+
             </select>
          </td>
 	    <td>职务：</td>
@@ -60,8 +59,6 @@
 	  </tr>
 	</table>
 </form>
-
-
 
 </body>
 </html>

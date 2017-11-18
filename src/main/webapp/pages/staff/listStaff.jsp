@@ -96,10 +96,20 @@
                         tr.appendChild(createTD(json[i].onDutyDate));
                         tr.appendChild(createTD(json[i].post.department.depName));
                         tr.appendChild(createTD(json[i].post.postName));
+
+                        function createA() {
+                            var td = document.createElement("td");
+                            td.setAttribute("align", "center")
+                            var a = document.createElement("a");
+                            a.setAttribute("href", "${pageContext.request.contextPath}update_findDepartment.action?staffId=${json[i].staffId}")
+                            var textNode = document.createElement("img");
+                            textNode.setAttribute("src", "${pageContext.request.contextPath}/images/button/modify.gif")
+                            textNode.setAttribute("class", "img")
+                            a.appendChild(textNode);
+                            td.appendChild(a);
+                            return td;
+                        }
                         tr.appendChild(createA());
-
-
-
                         tableEle.appendChild(tr);
                     }
                 }
@@ -116,18 +126,7 @@
             td.appendChild(textNode);
             return td;
         }
-        function createA() {
-            var td = document.createElement("td");
-            td.setAttribute("align", "center")
-            var a = document.createElement("a");
-            a.setAttribute("href", "${pageContext.request.contextPath}update_findDepartment.action?staffId=${json[i].staffId}")
-            var textNode = document.createElement("img");
-            textNode.setAttribute("src", "${pageContext.request.contextPath}/images/button/modify.gif")
-            textNode.setAttribute("class", "img")
-            a.appendChild(textNode);
-            td.appendChild(a);
-            return td;
-        }
+
 
     </script>
 
@@ -169,28 +168,49 @@
 <form id="conditionFormId" action="${pageContext.request.contextPath}/staff/staffAction_findAll" method="post">
     <table width="88%" border="0" style="margin: 20px;">
         <tr>
-            <td width="80px">部门：</td>
-            <td width="200px">
+            <%--<td width="80px">部门：</td>--%>
+            <%--<td width="200px">--%>
 
-                <select name="post.department.depId" onchange="changePost(this.value)" id="post.department.deptId">
-                    <option value="-1">--请选择部门--</option>
+                <%--<select name="post.department.depId" onchange="changePost(this.value)" id="post.department.deptId">--%>
+                    <%--<option value="-1">--请选择部门--</option>--%>
 
-                    <s:iterator value="department" var="dept">
-                        <option value="${dept.depId}">${dept.depName}</option>
-                    </s:iterator>
+                    <%--<s:iterator value="department" var="dept">--%>
+                        <%--<option value="${dept.depId}">${dept.depName}</option>--%>
+                    <%--</s:iterator>--%>
 
-                </select>
-            </td>
+                <%--</select>--%>
+            <%--</td>--%>
 
 
-            <td width="80px">职务：</td>
-            <td width="200px">
-                <select name="post.postId" id="post.postId">
-                    <option value="-1">--请选择职务--</option>
-                </select>
-            </td>
+            <%--<td width="80px">职务：</td>--%>
+            <%--<td width="200px">--%>
+                <%--<select name="post.postId" id="post.postId">--%>
+                    <%--<option value="-1">--请选择职务--</option>--%>
+                <%--</select>--%>
+            <%--</td>--%>
 
-            <td width="80px">姓名：</td>
+                <td width="80px">部门：</td>
+                <td width="200px">
+
+                    <select name="post.department.depId" onchange="changePost(this.value)" id="post.department.deptId">
+                        <option value="">--请选择部门--</option>
+
+                        <s:iterator value="department" var="dept">
+                            <option value="${dept.depId}">${dept.depName}</option>
+                        </s:iterator>
+
+                    </select>
+                </td>
+
+                <td width="80px">职务：</td>
+                <td width="200px">
+                    <select name="post.postId" id="post.postId">
+                        <option value="${postId}">--请选择职务--</option>
+                    </select>
+                </td>
+
+
+                <td width="80px">姓名：</td>
             <td width="200px"><input type="text" name="staff.staffName" size="12" id="staffName" value=""/></td>
             <td></td>
         </tr>
@@ -217,14 +237,7 @@
     </thead>
 
 
-    <%--<tbody id="td">--%>
-
-    <%--</tbody>--%>
-    <%--${staffs}--%>
-
-
-
-    <tbody>
+<tbody>
     <s:iterator var="s" value="staffs">
     <tr class="tabtd2">
         <td align="center">${s.staffName}</td>
@@ -233,21 +246,13 @@
         <td align="center">${s.post.department.depName}</td>
         <td align="center">${s.post.postName}</td>
         <td width="7%" align="center">
-
-
             <a href="update_findDepartment.action?staffId=${s.staffId}">
                 <img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/>
             </a>
         </td>
         </s:iterator>
     </tr>
-    </tbody>
-
-
-
-
-
-
+</tbody>
 </table>
 
 
@@ -268,3 +273,4 @@
 
 </body>
 </html>
+

@@ -25,7 +25,7 @@
         <td width="39%" align="left">[部门管理]</td>
 
         <td width="57%" align="right">
-            <%--添加部门 --%>
+            <%--添加部门 pass.action点击跳转--%>
             <a href="pass.action">
                 <img src="${pageContext.request.contextPath}/images/button/tianjia.gif"/>
             </a>
@@ -51,20 +51,34 @@
         <tr class="tabtd1">
             <td align="center">${q.depName}</td>
             <td width="7%" align="center">
+                <%--pass.action点击跳转--%>
                 <a href="pass.action?depId=${q.depId}&depName=${q.depName}">
                     <img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/>
                 </a>
             </td>
         </tr>
     </s:iterator>
-
-
 </table>
 
+<table border="0" cellspacing="0" cellpadding="0" align="center">
+    <%
+        Integer offSet = (Integer) session.getAttribute("offSet");
+        Integer pageSize = (Integer) session.getAttribute("pageSize");
+        Integer overPlus = (Integer) session.getAttribute("overPlus");
+    %>
 
-
-
-
+    <tr>
+        <td align="right">
+            <span>第<%=offSet/5+1%>/<%=pageSize%>页</span>
+            <span>
+        	<a href="listByPage.action?offSet=0">[首页]</a>&nbsp;&nbsp;
+            <a href="listByPage.action?offSet=<%=offSet-5%>">[上一页]</a>&nbsp;&nbsp;
+            <a href="listByPage.action?offSet=<%=offSet+5%>">[下一页]</a>&nbsp;&nbsp;
+            <a href="listByPage.action?offSet=<%=overPlus%>">[尾页]</a>
+        </span>
+        </td>
+    </tr>
+</table>
 
 </body>
 </html>

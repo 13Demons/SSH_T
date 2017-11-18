@@ -8,30 +8,29 @@
 
     <package name="dept" extends="Method">
 
-
         <default-class-ref class="deptAction"/>
 
-        <action name="save"  method="save">
-            <result name="success" type="chain">query</result>
+        <!--添加&&编辑-->
+        <action name="save" method="save">
+            <result name="success" type="redirectAction">query</result>
         </action>
 
-        <action name="query" method="query">
-            <result name="success">/pages/department/listDepartment.jsp</result>
-        </action>
-
+        <!--一个点击事件-->
         <action name="pass">
             <result name="success">/pages/department/addOrEditDepartment.jsp</result>
         </action>
 
+        <!--显示全部-->
+        <action name="query" method="query">
+            <result name="success">/pages/department/listDepartment.jsp</result>
+        </action>
 
-
-
+        <!--**************************************************************-->
+        <!--分页-->
+        <action name="listByPage" method="paging">
+            <result name="success" type="redirectAction">query</result>
+        </action>
 
     </package>
-
-
-
-
-
 
 </struts>
