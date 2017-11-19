@@ -49,11 +49,13 @@
                 <option value="department.depName">----请--选--择----</option>
             <%--遍历部门中的Id和Name--%>
             <s:iterator value="query" var="q">
-                <option value="${q.depId}">${q.depName}</option>
+                <option value="${q.depId}" selected="selected">${q.depName}</option>
             </s:iterator>
 
             </select>
          </td>
+
+
 	    <td>职务：</td>
 	    <td><input type="text" name="postName" value="${postName}"/> </td>
 	  </tr>

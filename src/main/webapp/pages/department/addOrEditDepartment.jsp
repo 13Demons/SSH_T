@@ -16,6 +16,16 @@
   </tr>
 </table>
 
+<%
+    if (request.getParameter("depName") != null){
+        String newDep = request.getParameter("depName");
+        String newDepName = new String(newDep.getBytes("iso-8859-1"),"utf-8");
+        request.setAttribute("editPostNameJsp",newDepName);
+    }
+%>
+
+
+
 <table border="0" cellspacing="0" cellpadding="0"  class="wukuang"width="100%">
   <tr>
     <td width="1%"><img src="${pageContext.request.contextPath}/images/tleft.gif"/></td>
@@ -34,18 +44,15 @@
   </tr>
 </table>
 
-
 <form action="save.action" method="post">
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	 <tr>
 	    <td>部门名称：</td>
-	    <td><input type="text" name="depName" /></td>
+	    <td><input type="text" name="depName" value="${editPostNameJsp}"/></td>
 	    <td><input type="hidden" name="depId" value="${depId}"/></td>
 	  </tr>
 	</table>
 </form>
-
-
 
 </body>
 </html>

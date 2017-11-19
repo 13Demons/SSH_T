@@ -111,7 +111,7 @@
 			<select name="post.department.depId" onchange="changePost(this.value)">
 				<option value="">----请--选--择----</option>
 				<s:iterator value="department" var="dept">
-					<option value="${dept.depId}">${dept.depName}</option>
+					<option value="${dept.depId}" selected="selected">${dept.depName}</option>
 				</s:iterator>
 			</select>
 	    </td>

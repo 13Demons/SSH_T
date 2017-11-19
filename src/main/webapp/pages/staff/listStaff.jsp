@@ -97,11 +97,15 @@
                         tr.appendChild(createTD(json[i].post.department.depName));
                         tr.appendChild(createTD(json[i].post.postName));
 
+
                         function createA() {
+                            var get_Id = json[i].staffId;
+                            var path = "${pageContext.request.contextPath}update_findDepartment.action?staffId=";
+                            path+=get_Id;
                             var td = document.createElement("td");
                             td.setAttribute("align", "center")
                             var a = document.createElement("a");
-                            a.setAttribute("href", "${pageContext.request.contextPath}update_findDepartment.action?staffId=${json[i].staffId}")
+                            a.setAttribute("href", "path")
                             var textNode = document.createElement("img");
                             textNode.setAttribute("src", "${pageContext.request.contextPath}/images/button/modify.gif")
                             textNode.setAttribute("class", "img")
@@ -109,6 +113,7 @@
                             td.appendChild(a);
                             return td;
                         }
+
                         tr.appendChild(createA());
                         tableEle.appendChild(tr);
                     }
@@ -126,6 +131,7 @@
             td.appendChild(textNode);
             return td;
         }
+
 
 
     </script>

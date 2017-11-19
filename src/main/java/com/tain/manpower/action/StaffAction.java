@@ -35,11 +35,11 @@ public class StaffAction extends BaseAction<Staff,StaffService> {
     public String login() {
         //获取登录名字,登录密码
         staffs = service.login(getModel().getLoginName(), getModel().getLoginPwd());
-        //关于登录传值loginName
-        ActionContext.getContext().getSession().put("loginName",getModel().getLoginName());
         if (staffs.isEmpty()) {
             return ERROR;
         }
+        //关于登录传值loginName
+        ActionContext.getContext().getSession().put("loginName",getModel().getLoginName());
         //关于更新密码的传值
         ActionContext.getContext().getSession().put("staff",staffs.get(0));
         return SUCCESS;
@@ -110,10 +110,7 @@ public class StaffAction extends BaseAction<Staff,StaffService> {
      */
     @SkipValidation
     public String anew(){
-        HttpServletRequest request = ServletActionContext.getRequest();
-        HttpSession session = request.getSession();
-        session.invalidate();
-//        ActionContext.getContext().getSession().remove(getModel().getLoginName());
+       ActionContext.getContext().getSession().remove("loginName");
         return SUCCESS;
     }
 

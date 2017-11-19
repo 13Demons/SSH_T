@@ -35,14 +35,8 @@ public class PostAction extends BaseAction<Post,PostService> {
      * @return
      */
     public String save(){
-        System.out.println(getModel().getPostId());
-        System.out.println(getModel().getDepartment().getDepId());
-//        ActionContext.getContext().getSession().get(getModel().getPostId() );
         save = service.save(getModel());
-//        System.out.println(getModel().getPostId());
-//        System.out.println(getModel().getDepartment().getDepId());
         return SUCCESS;
-
     }
 
     public List<Post> getSave() {
@@ -60,4 +54,6 @@ public class PostAction extends BaseAction<Post,PostService> {
     public void setQuery(List<Post> query) {
         this.query = query;
     }
+
+
 }

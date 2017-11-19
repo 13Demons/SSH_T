@@ -14,7 +14,7 @@
                     column="DEPT_ID"
                     lazy="false"/>
 
-        <set name="staffSet" table="T_STAFF" cascade="save-update" inverse="true">
+        <set name="staffSet" table="T_STAFF"  inverse="true">
             <key column="POST_ID"/>
             <one-to-many class="Staff"/>
         </set>

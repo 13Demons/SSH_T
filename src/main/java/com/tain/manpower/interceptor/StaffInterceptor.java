@@ -11,8 +11,8 @@ public class StaffInterceptor extends MethodFilterInterceptor {
 
     @Override
     protected String doIntercept(ActionInvocation actionInvocation) throws Exception {
-        Object login = ServletActionContext.getContext().getSession().get("login");
-        if (login == null){
+        Object login = ServletActionContext.getContext().getSession().get("loginName");
+        if ("".equals(login)||login==null){
             return "a";
         }
         return actionInvocation.invoke();

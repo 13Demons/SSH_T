@@ -40,6 +40,8 @@
   </tr>
 </table>
 
+
+
 <table width="100%" border="1" >
   
   <tr class="henglan" style="font-weight:bold;">
@@ -56,7 +58,7 @@
             <td width="7%" align="center">
 
                 <%--编译--%>
-                <a href="postDeptquery.action?postId=${postId}&&depId=${department.depId}">
+                <a href="postDeptquery.action?postId=${postId}&postName${postName}&depId=${department.depId}">
                 <img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/>
                 </a>
             </td>
